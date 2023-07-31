@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+body {font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,body{
+    max-width: 100vw;
+    overflow-x: hidden;
+    background-color: rgb(242, 242, 242);
+}

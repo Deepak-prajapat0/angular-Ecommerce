@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <ul class="navbar-nav flex-column gap-2 flex-sm-row">
+      <li
+        *ngFor="let link of links"
+        class="flex-sm-fill text-sm-center nav-item"
+      >
+        <a routerLink="{{ link.link }}" class="nav-link">{{ link.name }}</a>
+      </li>
+    </ul>
+      <form class="d-flex" role="search">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+  </div>
+</nav>

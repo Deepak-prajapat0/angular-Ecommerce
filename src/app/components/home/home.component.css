@@ -1,0 +1,15 @@
+.hording{
+    position: relative;
+}
+.hording > div{
+    width: 70%;
+    position: absolute;
+    top: 10vmax;
+    left: 2rem;
+    color: white;
+    
+}
+.hording #headings{
+    line-height: 2rem;
+    font-size: 30px;
+}

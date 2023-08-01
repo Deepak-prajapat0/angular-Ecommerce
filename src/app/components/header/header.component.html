@@ -1,16 +1,37 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary ">
   <div class="container-fluid">
     <ul class="navbar-nav flex-column gap-2 flex-sm-row">
       <li
         *ngFor="let link of links"
-        class="flex-sm-fill text-sm-center nav-item"
-      >
+        class="flex-sm-fill text-sm-center nav-item">
         <a routerLink="{{ link.link }}" class="nav-link">{{ link.name }}</a>
       </li>
     </ul>
-      <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+   <div class="position-relative px-2 d-flex gap-3"> 
+    <!-- <form class="d-flex" role="search">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"/>
       <button class="btn btn-outline-primary" type="submit">Search</button>
-    </form>
+    </form> -->
+    <div class="user-menu z-3">
+      <span><i class="bi bi-person-circle"></i></span>
+      <div style="position: absolute; left: -2rem; border: 1px solid; ">
+        <ul>
+          <li *ngIf="!loggedIn"><a routerLink="/login">Login</a></li>
+          <li *ngIf="!loggedIn"><a routerLink="/signup">Signup</a></li>
+          <li *ngIf="loggedIn" (click)="logout()">Logout</li>
+          <li *ngIf="loggedIn"><a routerLink="/orders">My order</a></li>
+        </ul>
+      </div>
+    </div> 
+    
+    <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="top: 5px; right: -15px;">
+      1
+    <span class="visually-hidden">unread messages</span>
+  </span>
+  <i class="bi bi-cart fs-4" style="cursor: pointer;"></i></div>
   </div>
 </nav>

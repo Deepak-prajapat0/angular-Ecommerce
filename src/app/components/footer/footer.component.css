@@ -1,0 +1,6 @@
+.footer{
+    border: .5px solid rgb(210, 208, 208);
+-webkit-box-shadow: 2px 4px 47px -23px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 4px 47px -23px rgba(0,0,0,0.75);
+box-shadow: 2px 4px 47px -23px rgba(0,0,0,0.75);
+}

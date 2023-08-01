@@ -1,0 +1,39 @@
+.user-menu {
+  position: relative;
+}
+.user-menu div {
+  display: none;
+  background-color: white;
+}
+.user-menu:hover div {
+  display: block;
+}
+
+.user-menu .bi-person-circle {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.user-menu ul {
+  width: 7rem;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.user-menu ul li {
+    padding: 5px;
+  list-style: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.user-menu ul li:hover {
+  background-color: rgb(231, 231, 231);
+  transition: background-color 0.5s;
+}
+.user-menu ul li a{
+  padding: 1rem .8rem;
+  text-decoration: none;
+  color: black;
+}

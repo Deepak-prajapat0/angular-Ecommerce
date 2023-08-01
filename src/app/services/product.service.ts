@@ -7,12 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class ProductService {
   constructor(private http: HttpClient) {}
-  url: string = 'https://dummyjson.com/products';
+  url: string = 'http://192.168.1.39:3000';
 
   getAllProducts(): Observable<any> {
-    return this.http.get(this.url);
+    return this.http.get(this.url+'/products');
   }
   getLimitedProducts(): Observable<any> {
-    return this.http.get(this.url + '/?limit=20');
+    return this.http.get(this.url + '/best-products');
+  }
+  getProductById(id: string): Observable<any> {
+    return this.http.get(this.url + `/products/${id}`);
   }
 }

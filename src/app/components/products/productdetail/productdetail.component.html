@@ -1,0 +1,48 @@
+<div class="container-fluid py-4">
+  <div
+    class="p-2 d-flex flex-column flex-md-row gap-3 justify-content-evenly align-items-center"
+    *ngIf="product">
+    <!-- image of product -->
+    <div style="min-width: auto; max-width: 30rem">
+      <img
+        src="{{ image || product.images[0] }}"
+        alt="{{ product.title }}"
+        class="w-100 object-fit-cover"
+        style="height: 20rem;"
+        />
+
+        <div class="mt-2 d-flex flex-row gap-1 border" style="height: 6rem; width: 100%; overflow-x: auto;">
+          <img src="{{img}}" alt="" *ngFor="let img of product.images" style="height: 100%; width: auto;object-fit: cover;" (click)="changeImg(img)">
+        </div>
+    </div>
+
+    <!-- product Details -->
+    <div style="max-width: 30rem; align-self: flex-start;">
+      <span style="font-size: 12px; color: rgb(76, 76, 245)"
+        >Brand : {{ product.brand }}</span>
+      <h6 class="fs-3">{{ product.title }}</h6>
+      <p class="text-secondary">{{ product.description }}</p>
+      <span><i class="bi bi-star-fill text-warning"></i> {{ product.rating }}
+      </span>
+      <br />
+      <br />
+      <div class="position-relative">
+        <span class="fs-4"><i class="bi bi-currency-rupee"></i>{{ product.price }}</span>
+      <span
+        style="
+          padding-left: 5px;
+          text-decoration: line-through;
+          font-size: 10px;
+          position: absolute;
+          bottom: 0.9rem;
+          color: red;
+          ">
+          {{ product.discountPercentage }}% <i class="bi bi-arrow-down"></i>
+       </span>
+      </div>
+       <br>
+       <button class="btn btn-primary">Add to Cart <i class="bi bi-cart"></i></button>
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="!product">Not found</div>

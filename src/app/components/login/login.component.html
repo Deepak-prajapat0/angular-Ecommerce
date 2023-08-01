@@ -1,0 +1,21 @@
+<form [formGroup]="form" class="m-auto mt-5 p-4 border text-bg-light"  (ngSubmit)="onSubmit()">
+    <h2>Login here</h2>
+    <p>{{msg}}</p>
+    <div class="form-floating mt-4 mb-3">
+        <input type="email" id="email" class="form-control" placeholder="name@example.com" formControlName="email">
+        <label for="email">Email address</label>
+         <div *ngIf="email && email.touched" class="text-danger">
+                <span *ngIf="email.errors?.['required'] ">Enter email</span>
+                <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] ">Enter valid Email address</span>
+            </div>
+    </div>
+    <div class="form-floating">
+        <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+        <label for="password">Password</label>
+        <div *ngIf="password && password.touched" class="text-danger">
+                <span *ngIf="password.errors?.['required'] ">Enter password</span>
+                <span *ngIf="password.errors?.['minlength'] || password.errors?.['pattern'] "> Password length should be min 6 </span>
+            </div>
+    </div>
+    <button class="btn btn-primary mt-4 w-100" [class.disabled]="form.status === 'INVALID'">Login</button>
+</form>

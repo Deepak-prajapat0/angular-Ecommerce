@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 import { LoggerService } from 'src/app/services/logger.service';
 
 const routerLinks = [
@@ -18,13 +20,19 @@ const routerLinks = [
 })
 export class HeaderComponent {
   links: any[] = routerLinks;
-  constructor(private router: Router, private loggerService: LoggerService) {}
+  constructor(private router: Router, private loggerService: LoggerService,private authService:AuthService) {
+
+  }
   loggedIn: boolean = false;
+  count:number=0
+
 
   ngOnInit() {
     this.router.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('token')) {
+                this.count = this.authService.count;
+                console.log(this.authService.count);
           this.loggerService.isLoggedin = true;
           this.loggedIn = this.loggerService.isLoggedin;
         } else {

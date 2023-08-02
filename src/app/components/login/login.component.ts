@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoggerService } from 'src/app/services/logger.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'login',
@@ -9,15 +12,17 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  constructor(private router:Router, private authService:AuthService){
-
-    if (this.authService.isLoggedin || localStorage.getItem('token')) {
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private loggerService: LoggerService,
+    private toastr: ToastrService
+  ) {
+    if (this.loggerService.isLoggedin || localStorage.getItem('token')) {
       this.router.navigate(['/']);
     }
-
   }
-
-  msg = this.authService.msg
+  msg: String = '';
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -33,7 +38,7 @@ export class LoginComponent {
     return this.form.get('password');
   }
 
-  onSubmit(){
+  onSubmit() {
     this.authService.login(this.form.value)
   }
 }

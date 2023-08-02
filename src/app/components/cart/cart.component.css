@@ -1,0 +1,37 @@
+.quantityBtn{
+    margin-left: 10px;
+    width: 6rem; display: flex; flex-direction: row; align-items: center;
+}
+.quantityBtn input{
+    text-align: center;
+    border: none;
+}
+.quantityBtn i{
+    cursor: pointer;
+    padding: 3px 0;
+    border: 1px solid rgb(188, 188, 188);
+}
+.loader{
+    background: rgba( 255, 255, 255, 0.2 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 9px );
+-webkit-backdrop-filter: blur( 9px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.loader >div{
+    margin-top: 16rem;
+}
+.summery{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: start;
+}
+.summery span{
+    width: 8rem;
+}
+.summery span:nth-child(2){
+    width: 5rem;
+    text-align: end;
+}

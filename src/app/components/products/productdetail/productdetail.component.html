@@ -7,12 +7,11 @@
       <img
         src="{{ image || product.images[0] }}"
         alt="{{ product.title }}"
-        class="w-100 object-fit-cover"
-        style="height: 20rem;"
+        style="max-width: 100%; height: 20rem; object-fit: contain;"
         />
 
         <div class="mt-2 d-flex flex-row gap-1 border" style="height: 6rem; width: 100%; overflow-x: auto;">
-          <img src="{{img}}" alt="" *ngFor="let img of product.images" style="height: 100%; width: auto;object-fit: cover;" (click)="changeImg(img)">
+          <img src="{{img}}" alt="" *ngFor="let img of product.images" style="height: 100%; width: auto;object-fit: cover; border: 1px solid lightslategrey;" (click)="changeImg(img)">
         </div>
     </div>
 
@@ -41,7 +40,10 @@
        </span>
       </div>
        <br>
-       <button class="btn btn-primary">Add to Cart <i class="bi bi-cart"></i></button>
+       <button class="btn btn-primary" [disabled]="loading" (click)="addToCart(product._id)" >Add to Cart <span *ngIf="loading" class="spinner-border spinner-border-sm" aria-hidden="true"></span> <i *ngIf="!loading" class="bi bi-cart"></i></button>
+     
+        
+  
     </div>
   </div>
 </div>

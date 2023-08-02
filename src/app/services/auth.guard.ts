@@ -4,9 +4,9 @@ import {
   ActivatedRouteSnapshot,
   createUrlTreeFromSnapshot,
 } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { LoggerService } from './logger.service';
 
 export const authGuard = (next: ActivatedRouteSnapshot) => {
-  let value = inject(AuthService).isLoggedIn();
+  let value = inject(LoggerService).isLoggedin;
   return value ? true : createUrlTreeFromSnapshot(next, ['/', 'login']);
 };

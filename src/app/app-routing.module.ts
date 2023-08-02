@@ -8,6 +8,8 @@ import { SignupComponent } from './components/signup/signup.component';
 import { authGuard } from './services/auth.guard';
 import { OrdersComponent } from './components/orders/orders.component';
 import { WrongurlComponent } from './components/errorpages/wrongurl/wrongurl.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +17,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'products/:id', component: ProductdetailComponent },
+  { path: 'cart', canActivate: [authGuard], component: CartComponent },
+  { path: 'checkout', canActivate: [authGuard], component: CheckoutComponent },
   {
     path: 'orders',
     canActivate: [authGuard],

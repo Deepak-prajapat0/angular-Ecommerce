@@ -20,22 +20,28 @@ const routerLinks = [
 })
 export class HeaderComponent {
   links: any[] = routerLinks;
-  constructor(private router: Router, private loggerService: LoggerService,private authService:AuthService) {
-
-  }
+  constructor(
+    private router: Router,
+    private loggerService: LoggerService,
+    private authService:AuthService,
+    private cartService: CartService
+  ) {}
   loggedIn: boolean = false;
-  count:number=0
-
+  count: number = 0;
 
   ngOnInit() {
-    this.router.events.subscribe((val: any) => {
+    this.cartService.getCartData().subscribe((data:any) => {
+      if(data.cart){
+        this.count = data.cart.totalItems
+      }
+    });
+     this.router.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('token')) {
-                this.count = this.authService.count;
-                console.log(this.authService.count);
           this.loggerService.isLoggedin = true;
           this.loggedIn = this.loggerService.isLoggedin;
         } else {
+          this.count = 0;
           this.loggerService.isLoggedin = false;
           this.loggedIn = this.loggerService.isLoggedin;
         }
@@ -43,10 +49,7 @@ export class HeaderComponent {
     });
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.loggerService.isLoggedin = false;
-    this.loggedIn = this.loggerService.isLoggedin;
-    this.router.navigate(['/login']);
-  }
+ logout(){
+  this.authService.logout()
+ }
 }

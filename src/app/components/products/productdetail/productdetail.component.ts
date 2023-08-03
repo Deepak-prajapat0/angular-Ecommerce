@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -13,12 +14,15 @@ export class ProductdetailComponent {
   constructor(
     private router: ActivatedRoute,
     private productService: ProductService,
-    private cartService:CartService
+    private cartService:CartService,
+    private toastr:ToastrService
   ) {}
 
   product!: Product;
   image:string=''
   loading:boolean=false
+  
+
 
   ngOnInit(): void {
     let paramId = this.router.snapshot.paramMap.get('id');
@@ -35,9 +39,11 @@ export class ProductdetailComponent {
 
   addToCart(id:string){
     this.loading=true
-    this.cartService.addToCart(id).subscribe(res=>{
-      console.log(res)
-      this.loading =false
-    });
+    this.cartService.addToCart(id)
+     this.cartService.getCartData()
+      //  this.toastr.success("item added");
+         setTimeout(() => {
+          this.loading=false
+         }, 1500);
   }
 }

@@ -1,11 +1,11 @@
-<div *ngIf="loading" class="loader w-100 h-100 d-flex justify-content-center position-absolute  ">
+<div *ngIf="loading " class="loader w-100 h-100 d-flex justify-content-center position-absolute  ">
     <div class="spinner-border mx-auto" role="status">
         <span class="visually-hidden">Loading...</span>
     </div>
 </div>
 
 <div *ngIf="cartItems.length ===0">
-        <h1>Something is wrong please login again</h1>
+    <h1 class="text-center">Your cart is empty</h1>
 </div>
 
 <div class="p-4 d-flex flex-column flex-md-row gap-3 " *ngIf="cartItems.length">
@@ -15,24 +15,34 @@
             <div *ngFor="let items of cartItems" class="d-flex flex-row gap-2 p-2  justify-content-between border">
                 <div class="d-flex flex-row gap-2">
                     <img src="{{items.productId.thumbnail}}" alt="{{items.productId.title}}"
-                        style="width: 8rem; height: 6rem; object-fit: fill;">
+                        style="width: 5rem; height: 6rem; object-fit: fill;">
                     <div>
                         <h5>{{items.productId.title}}</h5>
-                        <h6 style="height: 2.2rem; overflow-y: hidden;">{{items.productId.description}}</h6>
+                        <h6 style="height: 2.2rem;  overflow-y: hidden;">{{items.productId.description}}</h6>
                         <div class="quantityBtn">
-                            <i class="bi bi-dash-lg px-2" (click)="cartUpdate(items.productId._id,items.quantity-1)"></i>
+                            <i class="bi bi-dash-lg px-2"
+                                (click)="cartUpdate(items.productId._id,items.quantity-1)"></i>
                             <input type="text" class="w-100" value="{{items.quantity}}" disabled>
-                            <i class="bi bi-plus-lg px-2" (click)="cartUpdate(items.productId._id,items.quantity+1)"></i>
+                            <i class="bi bi-plus-lg px-2"
+                                (click)="cartUpdate(items.productId._id,items.quantity+1)"></i>
                         </div>
                     </div>
 
                 </div>
-                <span style="width:max-content; margin: 2px; display: flex; text-align:right;"><i class="bi bi-currency-rupee"></i><span>{{items.productId.price}}</span></span>
+                <span
+                    style="width:8.5rem; margin: 2px; display: flex; flex-direction: column; justify-content: space-between; text-align:right;">
+                    <span>
+                        <i class="bi bi-currency-rupee"></i>
+                        <span>{{items.productId.price}}</span>
+                    </span>
+                    <i class="bi bi-trash text-danger" title="Delete"  (click)="cartUpdate(items.productId._id,0)" ></i>
+                </span>
             </div>
         </div>
     </div>
     <!--  Cart summery details -->
-    <div style="min-width:18rem;  max-width: 25rem; padding: 3px; border: 1px solid rgb(206, 208, 209); text-align: center;">
+    <div
+        style="min-width:16rem;  max-width: 25rem; height: max-content; padding: 3px; border: 1px solid rgb(206, 208, 209); text-align: center;">
         <h2>Cart Summery</h2>
         <div class="summery">
             <span>Subtotal</span>

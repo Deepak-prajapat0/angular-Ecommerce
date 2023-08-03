@@ -10,11 +10,13 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { WrongurlComponent } from './components/errorpages/wrongurl/wrongurl.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ForgotpasswordComponent } from './components/forms/forgotpassword/forgotpassword.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'products/:id', component: ProductdetailComponent },
   { path: 'cart', canActivate: [authGuard], component: CartComponent },

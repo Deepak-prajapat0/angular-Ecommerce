@@ -15,12 +15,12 @@ export class AuthService {
     private router: Router,
     private http: HttpClient,
     private loggerService: LoggerService,
-    private cartService:CartService,
+    private cartService: CartService,
     private toastr: ToastrService
   ) {}
 
   url: string = environment.apiUrl;
-  count:number=0
+  count: number = 0;
 
   login(data: any) {
     return this.http.post(this.url + '/login', data).subscribe(
@@ -28,9 +28,9 @@ export class AuthService {
         localStorage.setItem('token', res.token);
         this.router.navigate(['/']);
         this.loggerService.isLoggedin = true;
-        this.cartService.getUserCart().subscribe((res:any)=>{
-          this.count = res.cart.totalItems
-        })
+        // this.cartService.getUserCart().subscribe((res:any)=>{
+        //   this.count = res.cart.totalItems
+        // })
         this.toastr.success(res.msg);
       },
       (err) => {
@@ -39,14 +39,40 @@ export class AuthService {
     );
   }
   signup(data: any) {
-    return this.http
-      .post(this.url + '/register', data)
-      .subscribe((res: any) => {
+    return this.http.post(this.url + '/register', data).subscribe(
+      (res: any) => {
         localStorage.setItem('token', res.token);
         this.router.navigate(['/']);
         this.loggerService.isLoggedin = true;
-      },(err)=>{
+      },
+      (err) => {
         this.toastr.error(err.error.msg);
-      });
+      }
+    );
   }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('cart');
+    this.loggerService.isLoggedin = false;
+    this.router.navigate(['/login']);
+  }
+
+  forgotPassword(email:any){
+    return this.http
+      .post(this.url + '/forgetpassword', { email: email })
+      .subscribe(
+        (res: any) => {
+        if(!res){
+          this.toastr.error("We are unable to send link on your email")
+        }
+        },
+        (err) => {
+          this.toastr.error(err.error.msg);
+        }
+      );
+  }
+
+
 }
+

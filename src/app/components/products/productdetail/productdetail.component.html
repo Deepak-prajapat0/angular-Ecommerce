@@ -3,11 +3,11 @@
     class="p-2 d-flex flex-column flex-md-row gap-3 justify-content-evenly align-items-center"
     *ngIf="product">
     <!-- image of product -->
-    <div style="min-width: auto; max-width: 30rem">
+    <div style=" max-width: 30rem">
       <img
         src="{{ image || product.images[0] }}"
         alt="{{ product.title }}"
-        style="max-width: 100%; height: 20rem; object-fit: contain;"
+        style="width: 100%; height: 20rem; object-fit: contain;"
         />
 
         <div class="mt-2 d-flex flex-row gap-1 border" style="height: 6rem; width: 100%; overflow-x: auto;">

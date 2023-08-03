@@ -19,6 +19,8 @@ import { NotfoundComponent } from './components/errorpages/notfound/notfound.com
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ForgotpasswordComponent } from './components/forms/forgotpassword/forgotpassword.component';
+import { UpdatepasswordComponent } from './components/forms/updatepassword/updatepassword.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     WrongurlComponent,
     NotfoundComponent,
     CheckoutComponent,
+    ForgotpasswordComponent,
+    UpdatepasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,8 +48,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 4000,
-      positionClass: 'toast-top-right',
+      timeOut: 2000,
+      positionClass: 'toast-top-center',
+      progressBar:true,
+      closeButton:true,
       preventDuplicates: true,
     }),
   ],

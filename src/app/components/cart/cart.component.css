@@ -1,15 +1,21 @@
 .quantityBtn{
-    margin-left: 10px;
-    width: 6rem; display: flex; flex-direction: row; align-items: center;
+    padding: 6px;
+    width: 7rem;
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
 }
 .quantityBtn input{
     text-align: center;
     border: none;
 }
 .quantityBtn i{
-    cursor: pointer;
     padding: 3px 0;
     border: 1px solid rgb(188, 188, 188);
+}
+
+i{
+    cursor: pointer;
 }
 .loader{
     background: rgba( 255, 255, 255, 0.2 );

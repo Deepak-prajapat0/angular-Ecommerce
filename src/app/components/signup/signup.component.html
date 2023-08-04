@@ -1,28 +1,29 @@
 <form [formGroup]="form" class="m-auto mt-5 p-4 border text-bg-light"  (ngSubmit)="onSubmit()">
     <h2>Signup here</h2>
     <div class="form-floating mt-4 mb-3">
-        <input type="text" class="form-control" placeholder="abc" formControlName="name">
-        <label for="floatingInput">Name</label>
+        <input type="text" class="form-control" id="floatingName" placeholder="abc" formControlName="name">
+        <label for="floatingName">Name</label>
          <div *ngIf="name && name.touched" class="text-danger">
                 <span *ngIf="name.errors?.['required'] ">Enter name</span>
                 <span *ngIf="name.errors?.['minlength'] ">Enter valid name</span>
             </div>
     </div>
     <div class="form-floating mt-4 mb-3">
-        <input type="email" class="form-control" placeholder="name@example.com" formControlName="email">
-        <label for="floatingInput">Email address</label>
+        <input type="email" class="form-control" id="floatingEmail"  placeholder="name@example.com" formControlName="email">
+        <label for="floatingEmail">Email address</label>
          <div *ngIf="email && email.touched" class="text-danger">
                 <span *ngIf="email.errors?.['required'] ">Enter email</span>
                 <span *ngIf="email.errors?.['minlength'] || email.errors?.['email'] ">Enter valid Email address</span>
             </div>
     </div>
     <div class="form-floating">
-        <input type="password" class="form-control" placeholder="Password" formControlName="password">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password">
         <label for="floatingPassword">Password</label>
         <div *ngIf="password && password.touched" class="text-danger">
                 <span *ngIf="password.errors?.['required'] ">Enter password</span>
                 <span *ngIf="password.errors?.['minlength'] || password.errors?.['pattern'] "> Password length should be min 6 </span>
             </div>
     </div>
-    <button class="btn btn-primary mt-4 w-100" [class.disabled]="form.status === 'INVALID'">Signup</button>
+    <button class="btn btn-primary mt-4 mb-2 w-100" [class.disabled]="form.status === 'INVALID'">Signup</button>
+   <a  routerLink="/login">Already have an account ?</a>
 </form>

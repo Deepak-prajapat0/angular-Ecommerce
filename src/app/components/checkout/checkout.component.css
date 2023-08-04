@@ -25,3 +25,48 @@
     font-size: 11px;
     color: rgb(187, 15, 15);
 }
+/* order place button animation */
+.order{
+    margin: 1rem auto;
+    font-size: 22px;
+    height: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.order span::before{
+    content: "Place Order";
+    position: absolute;
+    top: 5px;
+    left: 2.5rem;
+}
+.textTransform::before{
+    transform: translateX(-15rem);
+    transition: all 1s;
+}
+
+.order span::after{
+    content: "\F270";
+    font-size: 26px;
+    font-family: "bootstrap-icons";
+    position: absolute;
+    top: 3px;
+    left: 6.5rem;
+    transform: translateY(-3rem);
+}
+.order .textTransform::after{
+    transform: translateY(0);
+    transition: all 1s ease-in;
+}
+
+.order i{
+    position: absolute;
+    top: 7px;
+    left: 10.7rem;
+}
+
+.order .animateIcon{
+  
+    transform: translateX(6rem);
+    transition: all 1s ease-in-out;
+}

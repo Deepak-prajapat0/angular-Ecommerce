@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -23,19 +23,23 @@ export class HeaderComponent {
   constructor(
     private router: Router,
     private loggerService: LoggerService,
-    private authService:AuthService,
+    private authService: AuthService,
     private cartService: CartService
   ) {}
   loggedIn: boolean = false;
-  count: number = 0;
+  count: number =  0
 
   ngOnInit() {
-    this.cartService.getCartData().subscribe((data:any) => {
-      if(data.cart){
-        this.count = data.cart.totalItems
-      }
-    });
-     this.router.events.subscribe((val: any) => {
+    let cart =localStorage.getItem('cart');
+    if(cart){
+      this.count = JSON.parse(cart).cart.totalItems
+    }
+      this.cartService.getCartData().subscribe((data: any) => {
+        if (data.cart) {
+          this.count = data.cart.totalItems;
+        }
+      });
+    this.router.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('token')) {
           this.loggerService.isLoggedin = true;
@@ -49,7 +53,7 @@ export class HeaderComponent {
     });
   }
 
- logout(){
-  this.authService.logout()
- }
+  logout() {
+    this.authService.logout();
+  }
 }

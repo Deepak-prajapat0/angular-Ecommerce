@@ -15,7 +15,6 @@ export class ProductdetailComponent {
     private router: ActivatedRoute,
     private productService: ProductService,
     private cartService:CartService,
-    private toastr:ToastrService
   ) {}
 
   product!: Product;
@@ -40,10 +39,11 @@ export class ProductdetailComponent {
   addToCart(id:string){
     this.loading=true
     this.cartService.addToCart(id)
-     this.cartService.getCartData()
-      //  this.toastr.success("item added");
-         setTimeout(() => {
-          this.loading=false
-         }, 1500);
+     this.cartService.getCartData().subscribe(res=>{
+
+       setTimeout(() => {
+         this.loading=false
+        }, 2000);
+     })
   }
 }

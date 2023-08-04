@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { environment } from '../environment/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from './auth.service';
 import { LoggerService } from './logger.service';
 
 @Injectable({
@@ -16,9 +15,7 @@ export class CartService {
   count: number = 0;
   cartData:[]=[]
 
-  private cartDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
-    []
-  );
+  private cartDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'x-api-key': localStorage.getItem('token') || '',
@@ -37,6 +34,7 @@ headers = new HttpHeaders({
         (response:any) => {
           this.cartData = response; // Assuming the API response is an array of cart items
           this.cartDataSubject.next(this.cartData); // Emit the updated cart data
+         localStorage.setItem('cart', JSON.stringify(this.cartData));
         },
         (error) => {
            this.toastr.error(error.error.msg || error.error.error);
@@ -49,7 +47,6 @@ headers = new HttpHeaders({
   }
 
   addToCart(id: string):void {
-    // console.log(this.headers);
      this.http
       .post(
         this.url + '/cart',
@@ -62,6 +59,7 @@ headers = new HttpHeaders({
         (response: any) => {
           this.cartData = response; // Assuming the API response is an array of cart items
           this.cartDataSubject.next(this.cartData); // Emit the updated cart data
+          localStorage.setItem('cart', JSON.stringify(this.cartData));
            this.toastr.success(response.msg);
         },
         (error) => {
@@ -69,7 +67,7 @@ headers = new HttpHeaders({
         }
       );
   }
-  cartUpdate(productId: string, quantity: number,headers:any):void {
+  cartUpdate(productId: string, quantity: number, headers:any):void {
      this.http
       .put(
         this.url + '/cart',
@@ -81,6 +79,7 @@ headers = new HttpHeaders({
           this.cartData = response; // Assuming the API response is an array of cart items
           this.cartDataSubject.next(this.cartData); // Emit the updated cart data
            this.toastr.success(response.msg);
+           localStorage.setItem('cart', JSON.stringify(this.cartData));
         },
         (error) => {
            this.toastr.error(error.error.msg);

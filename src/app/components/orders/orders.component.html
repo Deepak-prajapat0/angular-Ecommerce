@@ -1,2 +1,36 @@
-<p>orders works!</p>
-{{orderDetail | json}}
+<div *ngIf="loading " class="loader w-100 h-100 d-flex justify-content-center position-absolute  ">
+    <div class="spinner-border mx-auto" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<h1 class="text-center">My orders</h1>
+<div *ngIf="orders" class="d-flex flex-column gap-2 p-3" >
+    <div *ngFor="let order of orders">
+        <div class="card  px-3">
+            <div class="card-body d-flex flex-column flex-sm-row p-sm-2 p-0 py-2 justify-content-between gap-2 fs-6">
+                <div class="d-flex flex-row gap-2">
+                    <img src="{{order.orderDetails.products[0].productId.thumbnail}}" alt="" style="height: 4rem; width: 4rem;">
+                    <div class="d-flex flex-column w-50">
+                        <h5 class="card-title">{{order.orderDetails.products[0].productId.title}}</h5>
+                        <span class="card-text">{{order.orderDetails.products[0].productId.description}}</span>
+                        <small class="text-primary" *ngIf="order.orderDetails.products.length > 1">+{{order.orderDetails.products.length-1}}
+                            more</small>
+                    </div>
+                </div>
+                <div style="max-width: 15rem; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div class="d-flex flex-column gap-1">
+                        <span>Order on:</span>
+                        <span>{{getTime(order.createdAt)}}</span>
+                    </div>
+                        <span class="badge "
+                         [class.bg-warning] = "order.status ==='pending'"
+                         [class.bg-success] = "order.status ==='delivered'"
+                         >
+                         {{order.status}}
+                        </span>
+                        <button class="mt-2 btn btn-sm btn-primary" *ngIf="order.status==='pending'" title="Cancel order" (click)="orderCancel(order._id)"  >Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,7 +9,10 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./forgotpassword.component.css'],
 })
 export class ForgotpasswordComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService , private toastr:ToastrService) {}
+
+  linkSent:boolean=false
+  loading:boolean = false
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -18,7 +22,20 @@ export class ForgotpasswordComponent {
     return this.form.get('email');
   }
   onSubmit() {
-    console.log(this.email?.value)
-    this.authService.forgotPassword(this.email?.value)
+    this.loading=true
+    this.authService.forgotPassword(this.email?.value).subscribe(
+      (res: any) => {
+        if (!res) {
+          this.toastr.error('We are unable to send link on your email');
+        }
+        this.toastr.success(res.msg);
+        this.linkSent=true
+        this.loading=false
+      },
+      (err) => {
+        this.toastr.error(err.error.msg);
+        this.loading = false;
+      }
+    );
   }
 }

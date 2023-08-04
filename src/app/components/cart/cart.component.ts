@@ -34,7 +34,6 @@ headers:any
         this.cartItems = data.cart.cartItems;
         this.cartDetails = data.cart;
         this.loading = false;
-        localStorage.setItem('cart', JSON.stringify(this.cartDetails));
       }
      
     });

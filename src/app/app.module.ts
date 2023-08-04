@@ -48,7 +48,7 @@ import { UpdatepasswordComponent } from './components/forms/updatepassword/updat
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 2000,
+      timeOut: 2500,
       positionClass: 'toast-top-center',
       progressBar:true,
       closeButton:true,

@@ -28,9 +28,6 @@ export class AuthService {
         localStorage.setItem('token', res.token);
         this.router.navigate(['/']);
         this.loggerService.isLoggedin = true;
-        // this.cartService.getUserCart().subscribe((res:any)=>{
-        //   this.count = res.cart.totalItems
-        // })
         this.toastr.success(res.msg);
       },
       (err) => {
@@ -52,27 +49,27 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('cart');
+    // localStorage.removeItem('token');
+    // localStorage.removeItem('cart');
+    localStorage.clear();
     this.loggerService.isLoggedin = false;
     this.router.navigate(['/login']);
   }
 
-  forgotPassword(email:any){
-    return this.http
-      .post(this.url + '/forgetpassword', { email: email })
-      .subscribe(
-        (res: any) => {
-        if(!res){
-          this.toastr.error("We are unable to send link on your email")
-        }
-        },
-        (err) => {
-          this.toastr.error(err.error.msg);
-        }
-      );
+  forgotPassword(email: any) {
+    return this.http.post(this.url + '/forgetpassword', { email: email });
   }
 
-
+  updatePassword(form: any, emailToken: string) {
+    return this.http
+      .put(this.url + '/updatepassword/' + emailToken, form)
+      .subscribe((res:any) => {
+        this.toastr.success(res.msg)
+        this.router.navigate(['/login'])
+      },
+        (err) => {
+        this.toastr.error(err.error.msg);
+      });
+  }
 }
 

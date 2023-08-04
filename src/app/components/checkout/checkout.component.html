@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-md-row align-items-center">
+<div class="d-flex p-3 flex-column flex-md-row align-items-center">
     <div>
         <h1 class="ps-5 pt-1">Shipping address</h1>
         
@@ -16,7 +16,7 @@
                     <input type="phone" class="form-control" maxlength="10" id="phone" formControlName="phone">
                     <div *ngIf="phone && phone.touched" class="input-error">
                         <span *ngIf="phone.errors?.['required'] ">Enter phone number</span>
-                        <span *ngIf="phone?.errors?.['minlength'] ">Enter valid phone number</span>
+                        <span *ngIf="phone?.errors?.['minlength'] || phone?.errors?.['pattern'] ">Enter valid phone number</span>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -62,9 +62,6 @@
                         <span *ngIf="pincode?.errors?.['minlength'] ">Enter valid pincode </span>
                     </div>
                 </div>
-                <div class="col-12 mt-4">
-                    <button class="btn btn-primary" [disabled]="form.status === 'INVALID' || addressFilled" (click)="saveAddress()" >Confirm Address</button>
-                </div>
             </form>
         
     </div>
@@ -87,6 +84,9 @@
             <span>Total</span>
             <span>{{cartDetails.totalPrice}}</span>
         </div>
-        <button class="btn btn-primary w-75 m-auto mt-3 mb-2 px-4 " [disabled]="!addressFilled" (click)="placeOrder()">Place Order</button>
+        <button class=" order  btn btn-primary w-75" [disabled]="form.status === 'INVALID'"   [class.click]="isClassAdded" (keyup.enter)="placeOrder()"  (click)="placeOrder()">
+            <span [class.textTransform]="isClassAdded"></span>
+            <i class="bi bi-truck " [class.animateIcon]="isClassAdded"></i>
+        </button>
     </div>
 </div>

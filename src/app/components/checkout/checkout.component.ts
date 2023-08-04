@@ -14,19 +14,24 @@ import { ToastrService } from 'ngx-toastr';
 export class CheckoutComponent {
   constructor(
     private router: Router,
-    // private cartService: CartService,
+    private cartService: CartService,
     private orderService: OrderService,
     private toastr: ToastrService
   ) {}
 
   cartDetails: any;
   states: string[] = states;
-  addressFilled: boolean = false;
+  isClassAdded: boolean = false;
+
+  addClass(): void {
+    this.isClassAdded = true;
+  }
 
   ngOnInit(): void {
     let cart = localStorage.getItem('cart');
     if (cart) {
-      this.cartDetails = JSON.parse(cart);
+      this.cartDetails = JSON.parse(cart).cart;
+      console.log(this.cartDetails)
       if (this.cartDetails.cartItems.length === 0) {
         this.router.navigate(['/cart']);
       }
@@ -76,18 +81,14 @@ export class CheckoutComponent {
     return this.form.get('pincode');
   }
 
-  saveAddress() {
-    this.addressFilled = true;
-  }
-  editAddress() {
-    this.addressFilled = false;
-  }
-
   placeOrder() {
-    this.orderService.placeOrder(this.form.value).subscribe((res: any) => {
-      this.toastr.success(res.msg);
-      
-      this.router.navigate(['/']);
+    this.addClass();
+    this.orderService.placeOrder(this.form.value)
+    this.orderService.getOrderData().subscribe((data: any) => {
+      if (data) {
+        localStorage.removeItem('cart');
+       
+      }
     });
   }
 }

@@ -38,3 +38,8 @@
   text-decoration: none;
   color: black;
 }
+
+.navbar i:hover{
+  color: rgb(100, 134, 255);
+  transition: color .2s ease-in-out;
+}

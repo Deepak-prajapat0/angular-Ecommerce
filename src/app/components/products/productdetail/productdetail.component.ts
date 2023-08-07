@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +17,7 @@ export class ProductdetailComponent {
     private productService: ProductService,
     private cartService:CartService,
   ) {}
-
+  headers:any
   product!: Product;
   image:string=''
   loading:boolean=false
@@ -25,6 +26,10 @@ export class ProductdetailComponent {
 
   ngOnInit(): void {
     let paramId = this.router.snapshot.paramMap.get('id');
+        this.headers = new HttpHeaders({
+          'Content-Type': 'application/json',
+          'x-api-key': localStorage.getItem('token') || '',
+        });
     if (paramId) {
       this.productService.getProductById(paramId).subscribe((res) => {
         this.product = res.product;
@@ -38,7 +43,7 @@ export class ProductdetailComponent {
 
   addToCart(id:string){
     this.loading=true
-    this.cartService.addToCart(id)
+    this.cartService.addToCart(this.headers,id)
      this.cartService.getCartData().subscribe(res=>{
 
        setTimeout(() => {

@@ -1,3 +1,12 @@
+.navbar{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+
 .user-menu {
   position: relative;
 }
@@ -42,4 +51,18 @@
 .navbar i:hover{
   color: rgb(100, 134, 255);
   transition: color .2s ease-in-out;
+}
+.offcanvas{
+  width: 100vw;
+background: rgba( 81, 77, 77, 0.5 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 11px );
+-webkit-backdrop-filter: blur( 11px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.offcanvas > div{
+  width: 15rem;
+  height: 100%;
+  background-color: aqua;
 }

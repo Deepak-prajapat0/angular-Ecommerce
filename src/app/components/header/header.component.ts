@@ -28,6 +28,7 @@ export class HeaderComponent {
   ) {}
   loggedIn: boolean = false;
   count: number =  0
+  open:boolean = false
 
   ngOnInit() {
     let cart =localStorage.getItem('cart');
@@ -55,5 +56,12 @@ export class HeaderComponent {
 
   logout() {
     this.authService.logout();
+  }
+
+  show(){
+    this.open = true
+  }
+  hide(){
+    this.open = false
   }
 }

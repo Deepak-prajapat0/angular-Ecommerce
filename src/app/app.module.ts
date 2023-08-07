@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ForgotpasswordComponent } from './components/forms/forgotpassword/forgotpassword.component';
 import { UpdatepasswordComponent } from './components/forms/updatepassword/updatepassword.component';
+import { OrderDetailsComponent } from './components/order-details/orderDetails.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { UpdatepasswordComponent } from './components/forms/updatepassword/updat
     CheckoutComponent,
     ForgotpasswordComponent,
     UpdatepasswordComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,7 @@ import { UpdatepasswordComponent } from './components/forms/updatepassword/updat
       positionClass: 'toast-top-center',
       progressBar:true,
       closeButton:true,
-      preventDuplicates: true,
+      preventDuplicates: false,
     }),
   ],
   providers: [],

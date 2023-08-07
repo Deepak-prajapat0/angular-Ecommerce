@@ -1,5 +1,7 @@
 form{
     width: 20rem;
+    margin: auto;
+    margin-top: 6rem;
 }
 
 .form-floating{

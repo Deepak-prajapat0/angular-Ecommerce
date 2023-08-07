@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { OrderService } from 'src/app/services/order.service';
@@ -14,30 +15,24 @@ export class OrdersComponent {
   ) {}
   loading: boolean = false;
   orders: any;
+  headers:any
 
   getTime(input: string) {
     return new Date(input).toLocaleDateString();
   }
   ngOnInit(): void {
     this.loading = true
-    this.orderService.getUserOrder();
+      this.headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'x-api-key': localStorage.getItem('token') || '',
+      });
+    this.orderService.getUserOrder(this.headers);
     this.orderService.getOrderData().subscribe((data: any) => {
-      if (data.order) {
+      if (data) {
         this.orders = data.order;
         this.loading = false
       }
     });
   }
 
-  orderCancel(id: string) {
-    this.loading = true
-    this.orderService.cancelOrder(id);
-    this.orderService.getOrderData().subscribe((data: any) => {
-      if (data) {
-        this.orders = this.orders.filter((x: any) => x._id != id);
-        this.toastr.success(data.msg);
-        this.loading = false
-      }
-    });
-  }
 }

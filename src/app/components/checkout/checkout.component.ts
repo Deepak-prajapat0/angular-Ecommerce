@@ -56,6 +56,7 @@ export class CheckoutComponent {
       Validators.required,
       Validators.minLength(6),
       Validators.maxLength(6),
+      Validators.pattern('^[0-9]*$')
     ]),
   });
 
@@ -82,13 +83,20 @@ export class CheckoutComponent {
   }
 
   placeOrder() {
-    this.addClass();
-    this.orderService.placeOrder(this.form.value)
-    this.orderService.getOrderData().subscribe((data: any) => {
-      if (data) {
-        localStorage.removeItem('cart');
-       
-      }
-    });
+   if(this.form.errors){
+    return 
+   }
+   else{
+     this.addClass();
+     this.orderService.placeOrder(this.form.value);
+     this.orderService.getOrderData().subscribe((data: any) => {
+       if (data) {
+         localStorage.removeItem('cart');
+          setTimeout(() => {
+             this.router.navigate(['/orders']);
+          },3000);
+       }
+     });
+   }
   }
 }

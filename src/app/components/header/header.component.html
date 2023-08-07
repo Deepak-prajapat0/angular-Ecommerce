@@ -10,7 +10,23 @@
     </ul>
 
     <!-- menu button -->
-    <i class="bi bi-list d-sm-none d-block fs-1"></i>
+    <i class="bi bi-list d-sm-none d-block fs-1" (click)="show()"></i>
+    <!-- sidebar -->
+  <div [class.show]="open" class="offcanvas d-sm-none offcanvas-start backdrop" data-bs-scroll="true" id="offcanvasExample" (click)="hide()"   aria-labelledby="offcanvasExampleLabel">
+    <div>
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" (click)="hide()"></button>
+      </div>
+      <div class="offcanvas-body">
+            <ul class="navbar-nav d-sm-none d-block flex-column gap-2 flex-sm-row">
+              <li *ngFor="let link of links" class="flex-sm-fill text-sm-center nav-item">
+                <a routerLink="{{ link.link }}" class="nav-link" (click)="hide()">{{ link.name }}</a>
+              </li>
+            </ul>
+      </div>
+    </div>
+  </div>
 
 
 
@@ -25,7 +41,7 @@
 
             <!-- if user is login -->
             <li *ngIf="loggedIn" (click)="logout()">Logout</li>
-            <li *ngIf="loggedIn"><a routerLink="/orders">My order</a></li>
+            <li *ngIf="loggedIn"><a routerLink="/order">My order</a></li>
           </ul>
         </div>
       </div>

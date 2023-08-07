@@ -59,7 +59,7 @@
                     <input type="text"  class="form-control" id="pincode" maxlength="6" formControlName="pincode" >
                     <div *ngIf="pincode && pincode.touched" class="input-error">
                         <span *ngIf="pincode.errors?.['required'] ">Enter pincode</span>
-                        <span *ngIf="pincode?.errors?.['minlength'] ">Enter valid pincode </span>
+                        <span *ngIf="pincode?.errors?.['minlength'] || pincode?.errors?.['pattern'] ">Enter valid pincode </span>
                     </div>
                 </div>
             </form>

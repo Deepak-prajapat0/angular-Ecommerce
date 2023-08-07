@@ -10,49 +10,57 @@ import { LoggerService } from './logger.service';
   providedIn: 'root',
 })
 export class CartService {
-  constructor(private toastr:ToastrService, private http: HttpClient,private loggerService:LoggerService) {}
-  url: string = environment.apiUrl;
-  count: number = 0;
-  cartData:[]=[]
-
-  private cartDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
-headers = new HttpHeaders({
+  headers: any;
+  constructor(
+    private toastr: ToastrService,
+    private http: HttpClient,
+    private loggerService: LoggerService
+  ) {
+    this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'x-api-key': localStorage.getItem('token') || '',
     });
+  }
+  url: string = environment.apiUrl;
+  count: number = 0;
+  cartData: [] = [];
+
+  private cartDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
+    []
+  );
 
   getCartData(): Observable<any> {
     return this.cartDataSubject.asObservable();
   }
 
-  getUserCart(headers:any): void {
+  getUserCart(headers: any): void {
     this.http
       .get(this.url + '/cart', {
-        headers: headers
+        headers: headers,
       })
       .subscribe(
-        (response:any) => {
+        (response: any) => {
           this.cartData = response; // Assuming the API response is an array of cart items
           this.cartDataSubject.next(this.cartData); // Emit the updated cart data
-         localStorage.setItem('cart', JSON.stringify(this.cartData));
+          localStorage.setItem('cart', JSON.stringify(this.cartData));
         },
         (error) => {
-           this.toastr.error(error.error.msg || error.error.error);
-           if(error.status === 500 || error.status === 401){
-              localStorage.removeItem('token')
-              this.loggerService.isLoggedin=false
-           }
+          this.toastr.error(error.error.msg || error.error.error);
+          if (error.status === 500 || error.status === 401) {
+            localStorage.removeItem('token');
+            this.loggerService.isLoggedin = false;
+          }
         }
       );
   }
 
-  addToCart(id: string):void {
-     this.http
+  addToCart(headers:any,id: string): void {
+    this.http
       .post(
         this.url + '/cart',
         { id: id },
         {
-          headers: this.headers
+          headers: headers,
         }
       )
       .subscribe(
@@ -60,29 +68,25 @@ headers = new HttpHeaders({
           this.cartData = response; // Assuming the API response is an array of cart items
           this.cartDataSubject.next(this.cartData); // Emit the updated cart data
           localStorage.setItem('cart', JSON.stringify(this.cartData));
-           this.toastr.success(response.msg);
+          this.toastr.success(response.msg);
         },
         (error) => {
-           this.toastr.error(error.error.msg);
+          this.toastr.error(error.error.msg);
         }
       );
   }
-  cartUpdate(productId: string, quantity: number, headers:any):void {
-     this.http
-      .put(
-        this.url + '/cart',
-        { productId, quantity },
-        { headers: headers }
-      )
+  cartUpdate(productId: string, quantity: number, headers: any): void {
+    this.http
+      .put(this.url + '/cart', { productId, quantity }, { headers: headers })
       .subscribe(
-        (response:any) => {
+        (response: any) => {
           this.cartData = response; // Assuming the API response is an array of cart items
           this.cartDataSubject.next(this.cartData); // Emit the updated cart data
-           this.toastr.success(response.msg);
-           localStorage.setItem('cart', JSON.stringify(this.cartData));
+          this.toastr.success(response.msg);
+          localStorage.setItem('cart', JSON.stringify(this.cartData));
         },
         (error) => {
-           this.toastr.error(error.error.msg);
+          this.toastr.error(error.error.msg);
         }
       );
   }

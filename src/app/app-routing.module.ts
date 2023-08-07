@@ -12,6 +12,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ForgotpasswordComponent } from './components/forms/forgotpassword/forgotpassword.component';
 import { UpdatepasswordComponent } from './components/forms/updatepassword/updatepassword.component';
+import { OrderDetailsComponent } from './components/order-details/orderDetails.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,10 +25,16 @@ const routes: Routes = [
   { path: 'cart', canActivate: [authGuard], component: CartComponent },
   { path: 'checkout', canActivate: [authGuard], component: CheckoutComponent },
   {
-    path: 'orders',
+    path: 'order',
     canActivate: [authGuard],
     component: OrdersComponent,
   },
+    {
+    path: 'order/:orderId',
+    canActivate: [authGuard],
+    component: OrderDetailsComponent,
+  },
+
   { path: '**', component: WrongurlComponent },
 ];
 

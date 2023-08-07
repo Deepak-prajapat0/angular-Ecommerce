@@ -1,0 +1,46 @@
+<div *ngIf="loading " class="loader w-100 h-100 d-flex justify-content-center position-absolute  ">
+    <div class="spinner-border mx-auto" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div *ngIf="orderDetail && orderDetail.orderDetails && orderDetail.orderDetails.products " class="py-2 d-flex flex-md-row flex-column justify-content-around align-items-center ">
+    <div *ngIf="orderDetail.orderDetails">
+        <div *ngFor="let item of orderDetail.orderDetails.products">
+            <div class="card m-2">
+                <div class="card-body" class="p-2 d-flex flex-row gap-2">
+                    <img src="{{item.productId.thumbnail}}" alt="" style="height:5rem; width: 5rem;">
+                    <div class="d-flex flex-column w-50">
+                        <h5 class="card-title">{{item.productId.title}}</h5>
+                        <span class="card-text">{{item.productId.description}}</span>
+                    </div>
+                    <div class="ms-auto d-flex flex-column justify-content-between">
+                        <span><i class="bi bi-currency-rupee"></i>{{item.productId.price}} x {{item.quantity}}</span>
+                        <button class="btn btn-warning" (click)="cancelItem(item.productId._id)">Cancel Item</button>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+        <button class="cancel btn btn-primary" (click)="orderCancel(orderDetail._id)" >Cancel Order</button>
+    </div>
+    <div class="summery" *ngIf="orderDetail.orderDetails" style="width: 20rem; border: 1px solid black;">
+        <h2 class="text-center">Order Summery</h2>
+        <div>
+            <div><span>TotalItems</span><span>{{orderDetail.orderDetails.totalItems}}</span></div>
+            <div><span>TotalPrice</span><span>{{orderDetail.orderDetails.totalPrice}}</span></div>
+        </div>
+        <div id="address-details">
+            <b>Ship to:</b>
+            <div>
+                <span>{{orderDetail.shippingDetails.name}}</span>
+                <span>{{orderDetail.shippingDetails.phone}}</span>
+                <span>{{orderDetail.shippingDetails.address.house}}</span>
+                <span>{{orderDetail.shippingDetails.address.street}}</span>
+                <span>{{orderDetail.shippingDetails.address.city}}</span>
+                <span>{{orderDetail.shippingDetails.address.state}} {{orderDetail.shippingDetails.address.pincode}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+

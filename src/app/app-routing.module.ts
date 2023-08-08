@@ -13,6 +13,8 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ForgotpasswordComponent } from './components/forms/forgotpassword/forgotpassword.component';
 import { UpdatepasswordComponent } from './components/forms/updatepassword/updatepassword.component';
 import { OrderDetailsComponent } from './components/order-details/orderDetails.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactusComponent } from './components/contactus/contactus.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,12 +31,14 @@ const routes: Routes = [
     canActivate: [authGuard],
     component: OrdersComponent,
   },
-    {
+  {
     path: 'order/:orderId',
     canActivate: [authGuard],
     component: OrderDetailsComponent,
   },
 
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactusComponent },
   { path: '**', component: WrongurlComponent },
 ];
 

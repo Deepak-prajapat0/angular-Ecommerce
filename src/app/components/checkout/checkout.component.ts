@@ -14,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
 export class CheckoutComponent {
   constructor(
     private router: Router,
-    private cartService: CartService,
     private orderService: OrderService,
     private toastr: ToastrService
   ) {}
@@ -88,13 +87,13 @@ export class CheckoutComponent {
    }
    else{
      this.addClass();
-     this.orderService.placeOrder(this.form.value);
-     this.orderService.getOrderData().subscribe((data: any) => {
+     this.orderService.placeOrder(this.form.value).subscribe((data: any) => {
        if (data) {
          localStorage.removeItem('cart');
-          // setTimeout(() => {
-          //   this.router.navigate(['/order'])
-          // }, 1500);
+         this.toastr.success(data.msg)
+         setTimeout(() => {
+           this.router.navigate(['/order'])
+         }, 1500);
        }
      });
    }

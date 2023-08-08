@@ -17,18 +17,19 @@ export class OrderDetailsComponent {
     private toastr: ToastrService
   ) {}
   loading: boolean = false;
+  notFound:boolean = false;
   orderDetail: any;
   orderId: any;
 
   ngOnInit(): void {
     this.orderId = this.router.snapshot.paramMap.get('orderId');
-   
     if (this.orderId) {
-      this.orderService.getOrderDetails(this.orderId);
-      this.orderService.getOrderData().subscribe((data: any) => {
+      this.loading = true
+      this.orderService.getOrderDetails(this.orderId).subscribe((data: any) => {
         if (data) {
           this.orderDetail = data.order;
           this.loading = false;
+          this.notFound =true
         } 
       });
     }
@@ -36,24 +37,26 @@ export class OrderDetailsComponent {
 
   cancelItem(id: string) {
     this.loading = true
-    this.orderService.cancelItemFromOrder(this.orderId, id);
-    this.orderService.getOrderData().subscribe((data: any) => {
-      if (data) {
-        this.orderDetail = data.order;
-        this.loading = false;
-
-      }
-    });
+    this.orderService.cancelItemFromOrder(this.orderId, id).subscribe((data: any) => {
+        if (data) {
+          this.orderDetail = data.order;
+          this.toastr.success(data.msg);
+          this.loading = false;
+          this.notFound = true;
+          
+        }
+      });
   }
 
   orderCancel(id: string) {
     this.loading = true;
-    this.orderService.cancelOrder(id);
-    this.orderService.getOrderData().subscribe((data: any) => {
-     if (data) {
-       this.orderDetail = data.order;
-       this.loading = false;
-     } 
+    this.orderService.cancelOrder(id).subscribe((data: any) => {
+      if (data) {
+        this.orderDetail = data.order;
+         this.toastr.success(data.msg);
+        this.loading = false;
+        this.notFound = true;
+      }
     });
   }
 }

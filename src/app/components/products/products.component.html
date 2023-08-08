@@ -1,3 +1,9 @@
+<div *ngIf="loading " class="loader w-100 h-100 d-flex justify-content-center position-absolute  ">
+  <div class="spinner-border mx-auto" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
 <div class="py-4">
 <div class="container-fluid">
     <div class="row row-cols-2 row-cols-sm-4 row-cols-md-6 g-2 gy-2">
@@ -15,10 +21,4 @@
     </div>
     </div>
 </div>
-</div>
-
-<div *ngIf="products.length===0" class="d-flex justify-content-center">
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
 </div>

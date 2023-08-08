@@ -14,6 +14,7 @@ export class AuthService {
   constructor(
     private router: Router,
     private http: HttpClient,
+    private cartService:CartService,
     private loggerService: LoggerService,
     private toastr: ToastrService
   ) {}
@@ -26,6 +27,7 @@ export class AuthService {
       (res: any) => {
         localStorage.setItem('token', res.token);
         this.router.navigate(['/']);
+        this.cartService.getUserCart()
         this.loggerService.isLoggedin = true;
         this.toastr.success(res.msg);
       },
@@ -40,6 +42,7 @@ export class AuthService {
         localStorage.setItem('token', res.token);
         this.router.navigate(['/']);
         this.loggerService.isLoggedin = true;
+        this.toastr.success(res.msg);
       },
       (err) => {
         this.toastr.error(err.error.msg);

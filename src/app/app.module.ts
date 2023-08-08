@@ -23,6 +23,8 @@ import { ForgotpasswordComponent } from './components/forms/forgotpassword/forgo
 import { UpdatepasswordComponent } from './components/forms/updatepassword/updatepassword.component';
 import { OrderDetailsComponent } from './components/order-details/orderDetails.component';
 import { TokenInterceptorService } from './JwtInterceptor';
+import { AboutComponent } from './components/about/about.component';
+import { ContactusComponent } from './components/contactus/contactus.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { TokenInterceptorService } from './JwtInterceptor';
     ForgotpasswordComponent,
     UpdatepasswordComponent,
     OrderDetailsComponent,
+    AboutComponent,
+    ContactusComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,20 +20,19 @@ export class CartComponent {
 
 headers:any
   ngOnInit(): void {
-    this.loading = true  
-  
-    this.cartService.getUserCart();
+    this.loading = true    
+      this.cartService.getUserCart();
     this.cartService.getCartData().subscribe((data: any) => {
       if (data.cart) {
         this.cartItems = data.cart.cartItems;
-        this.cartDetails = data.cart;
+        this.cartDetails = data.cart; 
         this.loading = false;
       }
      
     });
      setTimeout(() => {
        this.loading = false;
-     }, 3500);
+     },2500);
   }
 
   cartUpdate(productId: string, quantity: number) {
@@ -50,10 +49,10 @@ headers:any
     });
   }
 
-  ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
-    this.cartService.getCartData().subscribe().unsubscribe()
-  }
+  // ngOnDestroy(): void {
+  //   //Called once, before the instance is destroyed.
+  //   //Add 'implements OnDestroy' to the class.
+  //   this.cartService.getCartData().subscribe().unsubscribe
+  // }
 
 }

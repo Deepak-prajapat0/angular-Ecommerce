@@ -43,6 +43,7 @@ i{
     cursor: pointer;
 }
 .loader{
+    z-index: 200;
     background: rgba( 255, 255, 255, 0.2 );
 box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 backdrop-filter: blur( 9px );
@@ -53,6 +54,16 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 .loader >div{
     margin-top: 16rem;
 }
+
+.cart-details{
+    padding: 8px; 
+    min-width:16rem;  
+    max-width: 25rem; 
+    height: max-content; 
+    border: 1px solid rgb(206, 208, 209); 
+    text-align: center;
+}
+
 .summery{
     display: flex;
     flex-direction: row;

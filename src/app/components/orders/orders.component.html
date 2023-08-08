@@ -3,9 +3,10 @@
         <span class="visually-hidden">Loading...</span>
     </div>
 </div>
-
-<h1 *ngIf="orders && orders.length === 0" class="p-3 text-center ">No orders found</h1>
-
+<div *ngIf="orders && orders.length === 0" class="py-5 w-100 d-flex flex-column gap-3 align-items-center">
+    <h1 class="text-center">No orders found</h1>
+    <button class="btn btn-primary btn-sm" routerLink="/products">Continue Shopping</button>
+</div>
 <h1 *ngIf="orders && orders.length > 0" class="text-center">My orders</h1>
 <div *ngIf="orders && orders.length > 0" class="d-flex flex-column gap-2 p-3" >
     <div *ngFor="let order of orders">

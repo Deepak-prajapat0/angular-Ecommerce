@@ -22,104 +22,24 @@ export class OrderService {
     return this.orderDataSubject.asObservable()
   }
 
-  getUserOrder() {
-    return this.http
-      .get(this.url + '/order')
-      .subscribe(
-        (response: any) => {
-          this.orderData = response; // Assuming the API response is an array of cart items
-          this.orderDataSubject.next(this.orderData); // Emit the updated cart dat
-          
-        },
-        (error) => {
-          this.toastr.error(error.error.msg || error.error.error);
-          if (error.status === 500 || error.status === 401) {
-            localStorage.clear();
-            this.loggerService.isLoggedin = false;
-          }
-        }
-      );
-
-
-
-
-
-
+  getUserOrder():Observable<any> {
+    return this.http.get(this.url + '/order')
   }
 
   getOrderDetails(orderId:string){
-      return this.http
-        .get(this.url + '/order/'+ orderId)
-        .subscribe(
-          (response: any) => {
-            this.orderData = response; // Assuming the API response is an array of cart items
-            this.orderDataSubject.next(this.orderData); // Emit the updated cart data
-          },
-          (error) => {
-            this.toastr.error(error.error.msg || error.error.error);
-            if (error.status === 500 || error.status === 401) {
-              localStorage.clear();
-              this.loggerService.isLoggedin = false;
-            }
-          }
-        );
+      return this.http.get(this.url + '/order/'+ orderId)
+       
   }
 
-
   placeOrder(form: any) {
-    return this.http
-      .post(this.url + '/order', form)
-      .subscribe(
-        (response: any) => {
-          this.orderData = response; // Assuming the API response is an array of cart items
-          this.orderDataSubject.next(this.orderData); // Emit the updated cart data
-        },
-        (error) => {
-          this.toastr.error(error.error.msg || error.error.error);
-          if (error.status === 500 || error.status === 401) {
-            localStorage.clear();
-            this.loggerService.isLoggedin = false;
-          }
-        }
-      );
+    return this.http.post(this.url + '/order', form)
   }
 
   cancelItemFromOrder(orderId:string,productId:string){    
-     return this.http
-       .put(
-         this.url + '/order/' + orderId,
-         {productId},
-       )
-       .subscribe(
-         (response: any) => {
-            this.orderData = response; 
-           this.orderDataSubject.next(this.orderData); // Emit the updated cart data
-         },
-         (error) => {
-           this.toastr.error(error.error.msg || error.error.error);
-           if (error.status === 500 || error.status === 401) {
-             localStorage.clear();
-             this.loggerService.isLoggedin = false;
-           }
-         }
-       );
+     return this.http.put(this.url + '/order/' + orderId,{productId})
   }
 
   cancelOrder(orderId: string) {
-    return this.http
-      .put(this.url + '/order/cancel/' + orderId, {})
-      .subscribe(
-        (response: any) => {
-            this.orderData = response; 
-          this.orderDataSubject.next(this.orderData); // Emit the updated cart data
-        },
-        (error) => {
-          this.toastr.error(error.error.msg || error.error.error);
-          if (error.status === 500 || error.status === 401) {
-            localStorage.clear();
-            this.loggerService.isLoggedin = false;
-          }
-        }
-      );
+    return this.http.put(this.url + '/order/cancel/' + orderId, {})
   }
 }

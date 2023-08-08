@@ -4,10 +4,10 @@
     </div>
 </div>
 
-<h1 *ngIf="!orderDetail || orderDetail.status === 'canceled'" class="text-center"> Order is successfully canceled </h1>
+<h1 *ngIf="notFound && !orderDetail || orderDetail.status === 'canceled'" class="text-center"> Order is successfully canceled </h1>
 
 
-<div *ngIf="orderDetail && orderDetail.status !== 'canceled'" class="py-2 d-flex flex-md-row flex-column justify-content-around align-items-center ">
+<div *ngIf="orderDetail && orderDetail.status !== 'canceled'" class="py-2 d-flex flex-md-row flex-column justify-content-around align-items-center align-items-sm-start ">
     <div *ngIf="orderDetail.orderDetails" class="box">
         <div *ngFor="let item of orderDetail.orderDetails.products">
             <div class="card m-2">
@@ -27,15 +27,16 @@
         </div>
         <button class="cancel btn btn-primary"  *ngIf="orderDetail && orderDetail.orderDetails.totalItems >= 1 " (click)="orderCancel(orderDetail._id)" >Cancel Order</button>
     </div>
-    <div class="summery" *ngIf="orderDetail && orderDetail.orderDetails && orderDetail.orderDetails.totalItems >= 1 " >
+    <div class="summery card" *ngIf="orderDetail && orderDetail.orderDetails && orderDetail.orderDetails.totalItems >= 1 " >
+       <div class="card-body">
         <h2 class="text-center">Order Summery</h2>
-        <div>
+        <div class="orderDetails">
             <div><span>TotalItems</span><span>{{orderDetail.orderDetails.totalItems}}</span></div>
             <div><span>TotalPrice</span><span>{{orderDetail.orderDetails.totalPrice}}</span></div>
         </div>
         <div id="address-details">
             <b>Ship to:</b>
-            <div>
+            <div class="shippingDetails">
                 <span>{{orderDetail.shippingDetails.name}}</span>
                 <span>{{orderDetail.shippingDetails.phone}}</span>
                 <span>{{orderDetail.shippingDetails.address.house}}</span>
@@ -44,6 +45,7 @@
                 <span>{{orderDetail.shippingDetails.address.state}} {{orderDetail.shippingDetails.address.pincode}}</span>
             </div>
         </div>
+       </div>
     </div>
 </div>
 

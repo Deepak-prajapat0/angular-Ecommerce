@@ -19,15 +19,22 @@ export class OrdersComponent {
   getTime(input: string) {
     return new Date(input).toLocaleDateString();
   }
-  ngOnInit(): void {
+  ngOnInit() {
     this.loading = true
-    this.orderService.getUserOrder();
-    this.orderService.getOrderData().subscribe((data: any) => {
-      if (data) {
-        this.orders = data.order;
-        this.loading = false
-      }
-    });
+  
+    this.orderService.getUserOrder().subscribe(
+        (response: any) => {
+          this.loading = false
+         this.orders = response.order
+          
+        }
+    )
+    // this.orderService.getOrderData().subscribe((data: any) => {
+    //   if (data) {
+    //     this.orders = data.order;
+    //     this.loading = false
+    //   }
+    // });
   }
 
 }

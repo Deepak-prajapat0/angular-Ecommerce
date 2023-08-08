@@ -1,5 +1,10 @@
 <header></header>
 <div style="min-height: 90vh; margin-top: 3.6rem;">
+    <div *ngIf="loading " class="loader w-100 h-100 d-flex justify-content-center position-absolute  ">
+        <div class="spinner-border mx-auto" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <router-outlet></router-outlet>
 </div>
 <footer></footer>

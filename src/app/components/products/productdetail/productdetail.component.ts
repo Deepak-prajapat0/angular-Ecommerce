@@ -20,13 +20,16 @@ export class ProductdetailComponent {
   product!: Product;
   image:string=''
   loading:boolean=false
+  
 
 
   ngOnInit(): void {
     let paramId = this.router.snapshot.paramMap.get('id');
     if (paramId) {
+      this.loading = true
       this.productService.getProductById(paramId).subscribe((res) => {
         this.product = res.product;
+        this.loading = false;
       });
     }
   }

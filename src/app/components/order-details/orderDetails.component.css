@@ -1,4 +1,5 @@
 .loader{
+    z-index: 500;
     background: rgba( 255, 255, 255, 0.2 );
 box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 backdrop-filter: blur( 9px );
@@ -21,10 +22,10 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 .summery{
     padding: 1rem;
+    margin: 5px;
     width: 20rem;
-    border: 1px solid black;
 }
-.summery > div div{
+.summery .orderDetails div{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -41,7 +42,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     display: flex;
     flex-direction: column;
     gap: 5px;
-    color: rgb(71, 71, 71);
+    /* color: rgb(71, 71, 71); */
 }
 .cancel{
     margin: 2rem;

@@ -20,15 +20,9 @@ export class CartComponent {
 
 headers:any
   ngOnInit(): void {
-    this.loading = true
-    // this.loader();
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-api-key': localStorage.getItem('token') || '',
-    });
+    this.loading = true  
   
-  
-    this.cartService.getUserCart(this.headers);
+    this.cartService.getUserCart();
     this.cartService.getCartData().subscribe((data: any) => {
       if (data.cart) {
         this.cartItems = data.cart.cartItems;
@@ -46,7 +40,7 @@ headers:any
 
         // this.loader();
          this.loading = true;
-    this.cartService.cartUpdate(productId, quantity,this.headers);
+    this.cartService.cartUpdate(productId, quantity);
     this.cartService.getCartData().subscribe((data: any) => {
       if (data.cart) {
         this.cartItems = data.cart.cartItems;
@@ -55,4 +49,11 @@ headers:any
       localStorage.setItem('cart', JSON.stringify(this.cartDetails));
     });
   }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.cartService.getCartData().subscribe().unsubscribe()
+  }
+
 }

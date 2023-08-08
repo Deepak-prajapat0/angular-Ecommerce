@@ -15,18 +15,13 @@ export class OrdersComponent {
   ) {}
   loading: boolean = false;
   orders: any;
-  headers:any
 
   getTime(input: string) {
     return new Date(input).toLocaleDateString();
   }
   ngOnInit(): void {
     this.loading = true
-      this.headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'x-api-key': localStorage.getItem('token') || '',
-      });
-    this.orderService.getUserOrder(this.headers);
+    this.orderService.getUserOrder();
     this.orderService.getOrderData().subscribe((data: any) => {
       if (data) {
         this.orders = data.order;

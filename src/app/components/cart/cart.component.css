@@ -1,3 +1,11 @@
+img{
+    margin-top: 10px;
+    padding-right: 5px;
+    width: 5rem;
+    height: 5rem;
+    object-fit: fill;
+}
+
 .quantityBtn{
     padding: 6px;
     width: 7rem;
@@ -59,3 +67,10 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     text-align: end;
 }
 
+.item-description{
+    max-width: 30rem;
+    height: 2.2rem;
+    font-size: 14px;
+    color: rgb(87, 86, 86);
+    overflow-y: hidden;
+}

@@ -10,34 +10,24 @@ import { LoggerService } from './logger.service';
   providedIn: 'root',
 })
 export class CartService {
-  headers: any;
   constructor(
     private toastr: ToastrService,
     private http: HttpClient,
     private loggerService: LoggerService
-  ) {
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-api-key': localStorage.getItem('token') || '',
-    });
-  }
+  ) {}
   url: string = environment.apiUrl;
   count: number = 0;
   cartData: [] = [];
 
-  private cartDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
-    []
-  );
+  private cartDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   getCartData(): Observable<any> {
     return this.cartDataSubject.asObservable();
   }
 
-  getUserCart(headers: any): void {
+  getUserCart(): void {
     this.http
-      .get(this.url + '/cart', {
-        headers: headers,
-      })
+      .get(this.url + '/cart')
       .subscribe(
         (response: any) => {
           this.cartData = response; // Assuming the API response is an array of cart items
@@ -54,14 +44,11 @@ export class CartService {
       );
   }
 
-  addToCart(headers:any,id: string): void {
+  addToCart(id: string): void {
     this.http
       .post(
         this.url + '/cart',
         { id: id },
-        {
-          headers: headers,
-        }
       )
       .subscribe(
         (response: any) => {
@@ -71,13 +58,13 @@ export class CartService {
           this.toastr.success(response.msg);
         },
         (error) => {
-          this.toastr.error(error.error.msg);
+          this.toastr.warning("please login again");
         }
       );
   }
-  cartUpdate(productId: string, quantity: number, headers: any): void {
+  cartUpdate(productId: string, quantity: number): void {
     this.http
-      .put(this.url + '/cart', { productId, quantity }, { headers: headers })
+      .put(this.url + '/cart', { productId, quantity })
       .subscribe(
         (response: any) => {
           this.cartData = response; // Assuming the API response is an array of cart items

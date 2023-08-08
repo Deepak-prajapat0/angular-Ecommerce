@@ -15,7 +15,6 @@ export class AuthService {
     private router: Router,
     private http: HttpClient,
     private loggerService: LoggerService,
-    private cartService: CartService,
     private toastr: ToastrService
   ) {}
 
@@ -49,8 +48,6 @@ export class AuthService {
   }
 
   logout() {
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('cart');
     localStorage.clear();
     this.loggerService.isLoggedin = false;
     this.router.navigate(['/login']);

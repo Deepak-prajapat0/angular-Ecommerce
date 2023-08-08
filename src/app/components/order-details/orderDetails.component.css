@@ -16,6 +16,14 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     overflow-y: hidden;
     font-size: 12px;
 }
+.box{
+    min-width: 70%;
+}
+.summery{
+    padding: 1rem;
+    width: 20rem;
+    border: 1px solid black;
+}
 .summery > div div{
     display: flex;
     flex-direction: row;

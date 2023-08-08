@@ -10,15 +10,14 @@
 
 <div class="p-4 d-flex flex-column flex-md-row gap-3 " *ngIf="cartItems.length">
     <div class="w-100">
-        <h1>My shopping bag</h1>
+        <h1 class="text-center">My shopping bag</h1>
         <div class="d-flex flex-column gap-2">
             <div *ngFor="let items of cartItems" class="d-flex flex-row gap-2 p-2 text-bg-light justify-content-between border">
                 <div class="d-flex flex-row gap-2">
-                    <img src="{{items.productId.thumbnail}}" alt="{{items.productId.title}}"
-                        style="width: 5rem; height: 6rem; object-fit: fill;">
+                    <img src="{{items.productId.thumbnail}}" alt="{{items.productId.title}}">
                     <div>
                         <h5>{{items.productId.title}}</h5>
-                        <h6 style="height: 2.2rem;  overflow-y: hidden;">{{items.productId.description}}</h6>
+                        <h6 class="item-description">{{items.productId.description}}</h6>
                         <div class="quantityBtn">
                             <i class="bi bi-dash-lg px-2"
                                 (click)="cartUpdate(items.productId._id,items.quantity-1)"></i>

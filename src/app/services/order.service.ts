@@ -10,13 +10,7 @@ import { LoggerService } from './logger.service';
   providedIn: 'root',
 })
 export class OrderService {
-  headers: any;
-  constructor(private http: HttpClient,private toastr:ToastrService,private loggerService:LoggerService,private router:Router) {
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-api-key': localStorage.getItem('token') || '',
-    });
-  }
+  constructor(private http: HttpClient,private toastr:ToastrService,private loggerService:LoggerService,private router:Router) {}
 
   private orderDataSubject: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(
     []
@@ -28,9 +22,9 @@ export class OrderService {
     return this.orderDataSubject.asObservable()
   }
 
-  getUserOrder(headers:any) {
+  getUserOrder() {
     return this.http
-      .get(this.url + '/order', { headers: headers })
+      .get(this.url + '/order')
       .subscribe(
         (response: any) => {
           this.orderData = response; // Assuming the API response is an array of cart items
@@ -53,9 +47,9 @@ export class OrderService {
 
   }
 
-  getOrderDetails(orderId:string,headers:any){
+  getOrderDetails(orderId:string){
       return this.http
-        .get(this.url + '/order/'+ orderId, { headers: headers })
+        .get(this.url + '/order/'+ orderId)
         .subscribe(
           (response: any) => {
             this.orderData = response; // Assuming the API response is an array of cart items
@@ -74,7 +68,7 @@ export class OrderService {
 
   placeOrder(form: any) {
     return this.http
-      .post(this.url + '/order', form, { headers: this.headers })
+      .post(this.url + '/order', form)
       .subscribe(
         (response: any) => {
           this.orderData = response; // Assuming the API response is an array of cart items
@@ -90,19 +84,15 @@ export class OrderService {
       );
   }
 
-  cancelItemFromOrder(orderId:string,productId:string){
-    console.log(orderId,productId);
-    
+  cancelItemFromOrder(orderId:string,productId:string){    
      return this.http
        .put(
          this.url + '/order/' + orderId,
          {productId},
-         { headers: this.headers }
        )
        .subscribe(
          (response: any) => {
             this.orderData = response; 
-            console.log(response);
            this.orderDataSubject.next(this.orderData); // Emit the updated cart data
          },
          (error) => {
@@ -117,9 +107,10 @@ export class OrderService {
 
   cancelOrder(orderId: string) {
     return this.http
-      .put(this.url + '/order/cancel/' + orderId, {}, { headers: this.headers })
+      .put(this.url + '/order/cancel/' + orderId, {})
       .subscribe(
         (response: any) => {
+            this.orderData = response; 
           this.orderDataSubject.next(this.orderData); // Emit the updated cart data
         },
         (error) => {

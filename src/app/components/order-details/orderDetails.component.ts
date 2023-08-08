@@ -7,6 +7,7 @@ import { OrderService } from 'src/app/services/order.service';
 @Component({
   selector: 'app-order-details',
   templateUrl: './orderDetails.component.html',
+  styleUrls:['./orderDetails.component.css']
 })
 export class OrderDetailsComponent {
   constructor(
@@ -15,45 +16,33 @@ export class OrderDetailsComponent {
     private orderService: OrderService,
     private toastr: ToastrService
   ) {}
-  headers: any;
   loading: boolean = false;
   orderDetail: any;
   orderId: any;
 
   ngOnInit(): void {
     this.orderId = this.router.snapshot.paramMap.get('orderId');
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'x-api-key': localStorage.getItem('token') || '',
-    });
+   
     if (this.orderId) {
-      //  getting user order by orderId
-      // this.loading = true;
-      this.orderService.getOrderDetails(this.orderId,this.headers);
+      this.orderService.getOrderDetails(this.orderId);
       this.orderService.getOrderData().subscribe((data: any) => {
-        if (data.order) {
+        if (data) {
           this.orderDetail = data.order;
-          // this.loading = false;
+          this.loading = false;
         } 
-        // if (data.status == false) {
-        //   this.route.navigate(['/']);
-        // }
       });
     }
   }
 
   cancelItem(id: string) {
-    // console.log(id)
     this.loading = true
     this.orderService.cancelItemFromOrder(this.orderId, id);
     this.orderService.getOrderData().subscribe((data: any) => {
-      if (data.order) {
+      if (data) {
         this.orderDetail = data.order;
         this.loading = false;
+
       }
-      //  if (data.status == false) {
-      //    this.route.navigate(['/']);
-      //  }
     });
   }
 
@@ -61,15 +50,10 @@ export class OrderDetailsComponent {
     this.loading = true;
     this.orderService.cancelOrder(id);
     this.orderService.getOrderData().subscribe((data: any) => {
-      if (data.order) {
-        this.orderDetail = data.order;
-        this.toastr.success(data.msg);
-        this.loading = false;
-         this.route.navigate(['/']);
-      } 
-      //  if (data.status == false) {
-      //    this.route.navigate(['/']);
-      //  }
+     if (data) {
+       this.orderDetail = data.order;
+       this.loading = false;
+     } 
     });
   }
 }

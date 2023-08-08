@@ -92,9 +92,9 @@ export class CheckoutComponent {
      this.orderService.getOrderData().subscribe((data: any) => {
        if (data) {
          localStorage.removeItem('cart');
-          setTimeout(() => {
-             this.router.navigate(['/orders']);
-          },3000);
+          // setTimeout(() => {
+          //   this.router.navigate(['/order'])
+          // }, 1500);
        }
      });
    }

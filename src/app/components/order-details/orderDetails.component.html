@@ -4,8 +4,11 @@
     </div>
 </div>
 
-<div *ngIf="orderDetail && orderDetail.orderDetails && orderDetail.orderDetails.products " class="py-2 d-flex flex-md-row flex-column justify-content-around align-items-center ">
-    <div *ngIf="orderDetail.orderDetails">
+<h1 *ngIf="!orderDetail || orderDetail.status === 'canceled'" class="text-center"> Order is successfully canceled </h1>
+
+
+<div *ngIf="orderDetail && orderDetail.status !== 'canceled'" class="py-2 d-flex flex-md-row flex-column justify-content-around align-items-center ">
+    <div *ngIf="orderDetail.orderDetails" class="box">
         <div *ngFor="let item of orderDetail.orderDetails.products">
             <div class="card m-2">
                 <div class="card-body" class="p-2 d-flex flex-row gap-2">
@@ -16,15 +19,15 @@
                     </div>
                     <div class="ms-auto d-flex flex-column justify-content-between">
                         <span><i class="bi bi-currency-rupee"></i>{{item.productId.price}} x {{item.quantity}}</span>
-                        <button class="btn btn-warning" (click)="cancelItem(item.productId._id)">Cancel Item</button>
+                        <button class="btn btn-warning btn-sm" (click)="cancelItem(item.productId._id)">Cancel Item</button>
                     </div>
         
                 </div>
             </div>
         </div>
-        <button class="cancel btn btn-primary" (click)="orderCancel(orderDetail._id)" >Cancel Order</button>
+        <button class="cancel btn btn-primary"  *ngIf="orderDetail && orderDetail.orderDetails.totalItems >= 1 " (click)="orderCancel(orderDetail._id)" >Cancel Order</button>
     </div>
-    <div class="summery" *ngIf="orderDetail.orderDetails" style="width: 20rem; border: 1px solid black;">
+    <div class="summery" *ngIf="orderDetail && orderDetail.orderDetails && orderDetail.orderDetails.totalItems >= 1 " >
         <h2 class="text-center">Order Summery</h2>
         <div>
             <div><span>TotalItems</span><span>{{orderDetail.orderDetails.totalItems}}</span></div>

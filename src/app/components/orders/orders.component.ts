@@ -1,6 +1,4 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -9,10 +7,7 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./orders.component.css'],
 })
 export class OrdersComponent {
-  constructor(
-    private orderService: OrderService,
-    private toastr: ToastrService
-  ) {}
+  constructor(private orderService: OrderService) {}
   loading: boolean = false;
   orders: any;
 
@@ -20,21 +15,10 @@ export class OrdersComponent {
     return new Date(input).toLocaleDateString();
   }
   ngOnInit() {
-    this.loading = true
-  
-    this.orderService.getUserOrder().subscribe(
-        (response: any) => {
-          this.loading = false
-         this.orders = response.order
-          
-        }
-    )
-    // this.orderService.getOrderData().subscribe((data: any) => {
-    //   if (data) {
-    //     this.orders = data.order;
-    //     this.loading = false
-    //   }
-    // });
+    this.loading = true;
+    this.orderService.getUserOrder().subscribe((response: any) => {
+      this.loading = false;
+      this.orders = response.order;
+    });
   }
-
 }

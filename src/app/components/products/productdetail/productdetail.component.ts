@@ -1,4 +1,3 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -13,20 +12,24 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductdetailComponent {
   constructor(
-    private router: ActivatedRoute,
+    private Arouter: ActivatedRoute,
     private productService: ProductService,
-    private cartService:CartService,
-  ) {}
-  product!: Product;
-  image:string=''
-  loading:boolean=false
-  
-
-
+    private cartService: CartService,
+    private toastr: ToastrService
+    ) {}
+    product!: Product;
+    image: string = '';
+    loading: boolean = false;
+    token: string = '';
+    
+    changeImg(img: string) {
+      this.image = img;
+    }
   ngOnInit(): void {
-    let paramId = this.router.snapshot.paramMap.get('id');
+    this.token = localStorage.getItem('token') || '';
+    let paramId = this.Arouter.snapshot.paramMap.get('title');
     if (paramId) {
-      this.loading = true
+      this.loading = true;
       this.productService.getProductById(paramId).subscribe((res) => {
         this.product = res.product;
         this.loading = false;
@@ -34,18 +37,18 @@ export class ProductdetailComponent {
     }
   }
 
-  changeImg(img:string){
-      this.image = img
-  }
 
-  addToCart(id:string){
-    this.loading=true
-     this.cartService.addToCart(id);
-     this.cartService.getCartData().subscribe((res) => {
-       setTimeout(() => {
-         this.loading = false;
-       }, 2000);
-     });
-
+  addToCart(id: string) {
+    if (this.token) {
+      this.loading = true;
+      this.cartService.addToCart(id);
+      this.cartService.getCartData().subscribe((res) => {
+        setTimeout(() => {
+          this.loading = false;
+        }, 2000);
+      });
+    } else {
+      this.toastr.warning('please login first');
+    }
   }
 }

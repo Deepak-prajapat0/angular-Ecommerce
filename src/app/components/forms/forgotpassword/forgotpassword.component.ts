@@ -33,7 +33,6 @@ export class ForgotpasswordComponent {
         this.loading=false
       },
       (err) => {
-        this.toastr.error(err.error.msg);
         this.loading = false;
       }
     );

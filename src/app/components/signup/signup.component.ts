@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoggerService } from 'src/app/services/logger.service';
 
 @Component({
   selector: 'app-signup',
@@ -8,7 +10,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private loggerService:LoggerService,private router:Router) {
+      if (this.loggerService.isLoggedin || localStorage.getItem('token')) {
+        this.router.navigate(['/']);
+      }
+  }
   form = new FormGroup({
     name:new FormControl('',[Validators.required,Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email]),

@@ -1,6 +1,5 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -11,8 +10,7 @@ import { OrderService } from 'src/app/services/order.service';
 })
 export class OrderDetailsComponent {
   constructor(
-    private router: ActivatedRoute,
-    private route: Router,
+    private Arouter: ActivatedRoute,
     private orderService: OrderService,
     private toastr: ToastrService
   ) {}
@@ -22,7 +20,7 @@ export class OrderDetailsComponent {
   orderId: any;
 
   ngOnInit(): void {
-    this.orderId = this.router.snapshot.paramMap.get('orderId');
+    this.orderId = this.Arouter.snapshot.paramMap.get('orderId');
     if (this.orderId) {
       this.loading = true
       this.orderService.getOrderDetails(this.orderId).subscribe((data: any) => {

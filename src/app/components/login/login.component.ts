@@ -3,8 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoggerService } from 'src/app/services/logger.service';
-import { ToastrService } from 'ngx-toastr';
-
 
 @Component({
   selector: 'login',
@@ -15,15 +13,14 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private loggerService: LoggerService,
-    private toastr: ToastrService
+    private loggerService: LoggerService
   ) {
     if (this.loggerService.isLoggedin || localStorage.getItem('token')) {
       this.router.navigate(['/']);
     }
   }
   msg: String = '';
-  
+
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -40,6 +37,6 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.authService.login(this.form.value)
+    this.authService.login(this.form.value);
   }
 }

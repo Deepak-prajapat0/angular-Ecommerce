@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -10,8 +10,6 @@ const routerLinks = [
   { name: 'About', link: '/about' },
   { name: 'Contact-us', link: '/contact' },
 ];
-
-
 
 @Component({
   selector: 'header',
@@ -27,19 +25,19 @@ export class HeaderComponent {
     private cartService: CartService
   ) {}
   loggedIn: boolean = false;
-  count: number =  0
-  open:boolean = false
+  count: number = 0;
+  open: boolean = false;
 
   ngOnInit() {
-    let cart =localStorage.getItem('cart');
-    if(cart){
-      this.count = JSON.parse(cart).cart.totalItems
+    let cart = localStorage.getItem('cart');
+    if (cart) {
+      this.count = JSON.parse(cart).cart.totalItems;
     }
-      this.cartService.getCartData().subscribe((data: any) => {
-        if (data.cart) {
-          this.count = data.cart.totalItems;
-        }
-      });
+    this.cartService.getCartData().subscribe((data: any) => {
+      if (data.cart) {
+        this.count = data.cart.totalItems;
+      }
+    });
     this.router.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('token')) {
@@ -58,10 +56,10 @@ export class HeaderComponent {
     this.authService.logout();
   }
 
-  show(){
-    this.open = true
+  show() {
+    this.open = true;
   }
-  hide(){
-    this.open = false
+  hide() {
+    this.open = false;
   }
 }

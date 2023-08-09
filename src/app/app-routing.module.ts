@@ -7,7 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { authGuard } from './services/auth.guard';
 import { OrdersComponent } from './components/orders/orders.component';
-import { WrongurlComponent } from './components/errorpages/wrongurl/wrongurl.component';
+import { WrongurlComponent } from './components/wrongurl/wrongurl.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ForgotpasswordComponent } from './components/forms/forgotpassword/forgotpassword.component';
@@ -23,20 +23,11 @@ const routes: Routes = [
   { path: 'forgotpassword', component: ForgotpasswordComponent },
   { path: 'updatepassword/:emailToken', component: UpdatepasswordComponent },
   { path: 'products', component: ProductsComponent },
-  { path: 'products/:id', component: ProductdetailComponent },
+  { path: 'products/:title', component: ProductdetailComponent },
   { path: 'cart', canActivate: [authGuard], component: CartComponent },
   { path: 'checkout', canActivate: [authGuard], component: CheckoutComponent },
-  {
-    path: 'order',
-    canActivate: [authGuard],
-    component: OrdersComponent,
-  },
-  {
-    path: 'order/:orderId',
-    canActivate: [authGuard],
-    component: OrderDetailsComponent,
-  },
-
+  { path: 'order', canActivate: [authGuard],component: OrdersComponent },
+  { path: 'order/:orderId', canActivate: [authGuard], component: OrderDetailsComponent},
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactusComponent },
   { path: '**', component: WrongurlComponent },

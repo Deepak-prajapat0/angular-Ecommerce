@@ -8,17 +8,19 @@ import { environment } from '../environment/environment';
 })
 export class ProductService {
   constructor(private http: HttpClient) {}
-  url: string = environment.apiUrl;
+  url: string = environment.API_URL;
 
   getAllProducts(): Observable<any> {
     return this.http.get(this.url + '/products');
   }
+
+  getFilteredProducts(query: string): Observable<any> {
+    return this.http.get(this.url + `/products/search/${query}`);
+  }
   getLimitedProducts(): Observable<any> {
     return this.http.get(this.url + '/best-products');
   }
-  getProductById(id: string): Observable<any> {
-    return this.http.get(this.url + `/products/${id}`);
-
-    
+  getProductById(title: string): Observable<any> {
+    return this.http.get(this.url + `/products/${title}`);
   }
 }

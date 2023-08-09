@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
-import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-root',

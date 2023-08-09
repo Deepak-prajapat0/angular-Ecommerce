@@ -8,7 +8,7 @@
 <div class="container-fluid">
     <div class="row row-cols-2 row-cols-sm-4 row-cols-md-6 g-2 gy-2">
     <div class="col  p-2" *ngFor="let product of products">
-            <div  class="card" [routerLink]="['/products',product._id]">
+            <div  class="card" [routerLink]="['/products',product.title]">
             <img class="card-img-top " style="height: 6rem;" src="{{product.thumbnail}}" alt="{{product.title}}">
             <div class="card-body">
                 <h5 class="card-title" style="font-size: 12px; font-weight: 900;">{{product.brand}}</h5>

@@ -27,14 +27,12 @@
       </div>
     </div>
   </div>
-
-
-
-    <div class="position-relative px-2 d-flex gap-3">
+  <!-- user menu -->
+    <div class=" position-relative px-2 d-flex gap-3">
       <div class="user-menu z-3">
         <span><i class="bi bi-person-circle"></i></span>
-        <div style="position: absolute; left: -2rem; border: 1px solid">
-          <ul>
+        <div class="card" style="position: absolute; left: -2.5rem;">
+          <ul class="card-body">
             <!-- if user is not login -->
             <li *ngIf="!loggedIn"><a routerLink="/login">Login</a></li>
             <li *ngIf="!loggedIn"><a routerLink="/signup">Signup</a></li>

@@ -4,11 +4,14 @@
   </div>
 </div>
 
-<div class="row" *ngIf="!product && !loading">Not found</div>
+<div class="p-4 d-flex flex-column gap-2 align-items-center text-center fs-2" *ngIf="!product && !loading">
+  <span>Product not found</span>
+  <button class="btn btn-primary" routerLink="/products" >Go Back</button>
+</div>
 
 <div *ngIf="!loading" class="container-fluid py-4">
   <div
-    class="p-2 d-flex flex-column flex-md-row gap-3 justify-content-evenly align-items-center"
+    class="p-2 d-flex flex-column flex-md-row gap-5 justify-content-center align-items-center"
     *ngIf="product">
     <!-- image of product -->
     <div style=" max-width: 30rem">
@@ -18,7 +21,7 @@
         style="width: 100%; height: 20rem; object-fit: contain;"
         />
 
-        <div class="mt-2 d-flex flex-row gap-1 border" style="height: 6rem; width: 100%; overflow-x: auto;">
+        <div class="mt-2 m-auto d-flex flex-row gap-1 border" style="height: 6rem;width: 20rem; overflow-x: auto;">
           <img src="{{img}}" alt="" *ngFor="let img of product.images" style="height: 100%; width: auto;object-fit: cover; border: 1px solid lightslategrey;" (click)="changeImg(img)">
         </div>
     </div>
@@ -49,9 +52,6 @@
       </div>
        <br>
        <button class="btn btn-primary" [disabled]="loading" (click)="addToCart(product._id)" >Add to Cart <span *ngIf="loading" class="spinner-border spinner-border-sm" aria-hidden="true"></span> <i *ngIf="!loading" class="bi bi-cart"></i></button>
-     
-        
-  
     </div>
   </div>
 </div>

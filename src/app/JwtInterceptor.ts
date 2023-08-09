@@ -8,13 +8,14 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenInterceptorService implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private toastr:ToastrService) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -29,8 +30,13 @@ export class TokenInterceptorService implements HttpInterceptor {
     }
     return next.handle(request).pipe(
       catchError((err) => {
-        if (err.status === 401 || err.status === 500) {
+        console.log(err);
+        
+        if (err.status === 401 || err.status === 409) {
+          this.toastr.error(err.error.msg);
           this.authService.logout();
+        } else if (err.status === 404 || err.status === 400) {
+          this.toastr.error(err.error.msg);
         }
         const error = err.error.message || err.statusText;
         return throwError(error);

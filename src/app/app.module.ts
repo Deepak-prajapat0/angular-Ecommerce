@@ -14,8 +14,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { CartComponent } from './components/cart/cart.component';
-import { WrongurlComponent } from './components/errorpages/wrongurl/wrongurl.component';
-import { NotfoundComponent } from './components/errorpages/notfound/notfound.component';
+import { WrongurlComponent } from './components/wrongurl/wrongurl.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CheckoutComponent } from './components/checkout/checkout.component';
@@ -40,7 +39,6 @@ import { ContactusComponent } from './components/contactus/contactus.component';
     OrdersComponent,
     CartComponent,
     WrongurlComponent,
-    NotfoundComponent,
     CheckoutComponent,
     ForgotpasswordComponent,
     UpdatepasswordComponent,
@@ -59,7 +57,7 @@ import { ContactusComponent } from './components/contactus/contactus.component';
       positionClass: 'toast-top-center',
       progressBar: true,
       closeButton: true,
-      preventDuplicates: false,
+      preventDuplicates: true,
     }),
   ],
   providers: [

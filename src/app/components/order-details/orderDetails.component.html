@@ -1,10 +1,13 @@
-<div *ngIf="loading " class="loader w-100 h-100 d-flex justify-content-center position-absolute  ">
+<!-- <div *ngIf="loading " class="loader w-100 h-100 d-flex justify-content-center position-absolute  ">
     <div class="spinner-border mx-auto" role="status">
         <span class="visually-hidden">Loading...</span>
     </div>
-</div>
+</div> -->
 
-<h1 *ngIf="notFound && !orderDetail || orderDetail.status === 'canceled'" class="text-center"> Order is successfully canceled </h1>
+<div *ngIf="notFound && !orderDetail || orderDetail.status === 'canceled'" class="p-4 d-flex flex-column align-items-center text-center">
+    <span>Order is successfully canceled</span>
+    <button class="btn btn-primary" routerLink="/order">Go back</button>
+</div>
 
 
 <div *ngIf="orderDetail && orderDetail.status !== 'canceled'" class="py-2 d-flex flex-md-row flex-column justify-content-around align-items-center align-items-sm-start ">
@@ -19,13 +22,14 @@
                     </div>
                     <div class="ms-auto d-flex flex-column justify-content-between">
                         <span><i class="bi bi-currency-rupee"></i>{{item.productId.price}} x {{item.quantity}}</span>
-                        <button class="btn btn-warning btn-sm" (click)="cancelItem(item.productId._id)">Cancel Item</button>
+                        <button class="btn btn-warning btn-sm" [disabled]="loading" (click)="cancelItem(item.productId._id)">Cancel Item</button>
                     </div>
         
                 </div>
             </div>
         </div>
-        <button class="cancel btn btn-primary"  *ngIf="orderDetail && orderDetail.orderDetails.totalItems >= 1 " (click)="orderCancel(orderDetail._id)" >Cancel Order</button>
+        
+        <button class="cancel btn btn-primary" [disabled]="loading"  *ngIf="orderDetail && orderDetail.orderDetails.totalItems >= 1 " (click)="orderCancel(orderDetail._id)" >Cancel Order</button>
     </div>
     <div class="summery card" *ngIf="orderDetail && orderDetail.orderDetails && orderDetail.orderDetails.totalItems >= 1 " >
        <div class="card-body">

@@ -30,7 +30,7 @@ export class CheckoutComponent {
     let cart = localStorage.getItem('cart');
     if (cart) {
       this.cartDetails = JSON.parse(cart).cart;
-      console.log(this.cartDetails);
+      console.log(this.cartDetails)
       if (this.cartDetails.cartItems.length === 0) {
         this.router.navigate(['/cart']);
       }
@@ -55,7 +55,7 @@ export class CheckoutComponent {
       Validators.required,
       Validators.minLength(6),
       Validators.maxLength(6),
-      Validators.pattern('^[0-9]*$'),
+      Validators.pattern('^[0-9]*$')
     ]),
   });
 
@@ -82,19 +82,20 @@ export class CheckoutComponent {
   }
 
   placeOrder() {
-    if (this.form.errors) {
-      return;
-    } else {
-      this.addClass();
-      this.orderService.placeOrder(this.form.value).subscribe((data: any) => {
-        if (data) {
-          localStorage.removeItem('cart');
-          this.toastr.success(data.msg);
-          setTimeout(() => {
-            this.router.navigate(['/order']);
-          }, 1500);
-        }
-      });
-    }
+   if(this.form.errors){
+    return 
+   }
+   else{
+     this.addClass();
+     this.orderService.placeOrder(this.form.value).subscribe((data: any) => {
+       if (data) {
+         localStorage.removeItem('cart');
+         this.toastr.success(data.msg)
+         setTimeout(() => {
+           this.router.navigate(['/order'])
+         }, 1500);
+       }
+     });
+   }
   }
 }

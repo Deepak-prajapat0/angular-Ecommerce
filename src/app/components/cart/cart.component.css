@@ -5,6 +5,14 @@ img{
     height: 5rem;
     object-fit: fill;
 }
+.items{
+    min-height: 8rem;
+}
+.loading{
+    min-height: 8rem;
+    width: 100%;
+    background-color: aqua;
+}
 
 .quantityBtn{
     padding: 6px;

@@ -29,15 +29,18 @@ export class HeaderComponent {
   open: boolean = false;
 
   ngOnInit() {
-    let cart = localStorage.getItem('cart');
-    if (cart) {
-      this.count = JSON.parse(cart).cart.totalItems;
-    }
-    this.cartService.getCartData().subscribe((data: any) => {
-      if (data.cart) {
-        this.count = data.cart.totalItems;
-      }
-    });
+  //   let cart = localStorage.getItem('cart');
+  //   if (cart) {
+  //    let localCart = JSON.parse(cart)      
+  //     this.count = localCart.totalItems;
+  //   }
+  //  else{
+     this.cartService.getCartData().subscribe((data: any) => {
+       if (data) {
+         this.count = data.totalItems;
+       }
+     });
+  //  }
     this.router.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('token')) {

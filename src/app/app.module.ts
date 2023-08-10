@@ -24,6 +24,8 @@ import { OrderDetailsComponent } from './components/order-details/orderDetails.c
 import { TokenInterceptorService } from './JwtInterceptor';
 import { AboutComponent } from './components/about/about.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
+import { StripePayment } from './stripe/stripe.component';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { ContactusComponent } from './components/contactus/contactus.component';
     OrderDetailsComponent,
     AboutComponent,
     ContactusComponent,
+    StripePayment
   ],
   imports: [
     BrowserModule,

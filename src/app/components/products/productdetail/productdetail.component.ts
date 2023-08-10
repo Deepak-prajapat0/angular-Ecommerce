@@ -38,8 +38,7 @@ export class ProductdetailComponent {
   }
 
 
-  addToCart(id: string) {
-    if (this.token) {
+  addToCart(id: any) {
       this.loading = true;
       this.cartService.addToCart(id);
       this.cartService.getCartData().subscribe((res) => {
@@ -47,8 +46,5 @@ export class ProductdetailComponent {
           this.loading = false;
         }, 2000);
       });
-    } else {
-      this.toastr.warning('please login first');
-    }
   }
 }

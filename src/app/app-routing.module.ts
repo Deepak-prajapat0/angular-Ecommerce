@@ -15,6 +15,7 @@ import { UpdatepasswordComponent } from './components/forms/updatepassword/updat
 import { OrderDetailsComponent } from './components/order-details/orderDetails.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactusComponent } from './components/contactus/contactus.component';
+import { StripePayment } from './stripe/stripe.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -24,12 +25,13 @@ const routes: Routes = [
   { path: 'updatepassword/:emailToken', component: UpdatepasswordComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'products/:title', component: ProductdetailComponent },
-  { path: 'cart', canActivate: [authGuard], component: CartComponent },
+  { path: 'cart',  component: CartComponent },
   { path: 'checkout', canActivate: [authGuard], component: CheckoutComponent },
   { path: 'order', canActivate: [authGuard],component: OrdersComponent },
   { path: 'order/:orderId', canActivate: [authGuard], component: OrderDetailsComponent},
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactusComponent },
+  { path: 'stripe', component: StripePayment },
   { path: '**', component: WrongurlComponent },
 ];
 

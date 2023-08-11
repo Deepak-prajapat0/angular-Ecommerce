@@ -8,11 +8,11 @@ img{
 .items{
     min-height: 8rem;
 }
-.loading{
+/* .loading{
     min-height: 8rem;
     width: 100%;
     background-color: aqua;
-}
+} */
 
 .quantityBtn{
     padding: 6px;
@@ -26,7 +26,7 @@ img{
     border: none;
 }
 .quantityBtn i{
-    padding: 3px 0;
+    padding: 5px 0;
     border: 1px solid rgb(188, 188, 188);
      border-radius: 6px;
     transition: all .3s;
@@ -43,8 +43,10 @@ img{
     color: rgb(155, 0, 0);
     /* transform: scale(1.5); */
     font-size: 20px;
+    transform: rotate(-2deg);
     transition: all .1s ease-in-out;
 }
+
 
 
 i{

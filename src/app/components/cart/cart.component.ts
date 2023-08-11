@@ -15,41 +15,42 @@ export class CartComponent {
   ngOnInit(): void {
     this.loading = true;
     let cart = localStorage.getItem('cart')
-    if(cart){
+    if(cart && !localStorage.getItem('token')){
       let localCart = JSON.parse(cart)
           this.cartItems = localCart.cartItems;
           this.cartDetails = localCart;
+           localStorage.setItem('cart', JSON.stringify(this.cartDetails));
           this.loading = false;
-      setTimeout(() => {
-        this.loading = false;
-      }, 2500);
+    }
+    else if(!cart && !localStorage.getItem('token')){
+     
     }
     else{
-      // this.cartService.getUserCart();
-      this.cartService.getCartData().subscribe((data: any) => {
-        console.log(data);
-        
+      this.cartService.getUserCart()      
+      this.cartService.getCartData().subscribe((data: any) => {        
         if (data) {
           this.cartItems = data.cartItems;
           this.cartDetails = data;
           this.loading = false;
+          localStorage.setItem('cart',JSON.stringify(this.cartDetails))
         }
       });
-      setTimeout(() => {
-        this.loading = false;
-      }, 2500);
     }
+    setTimeout(() => {
+      this.loading = false;
+    }, 2500);
   }
 
   cartUpdate(productId: string, quantity: number) {
     this.loading = true;
-    this.cartService.cartUpdate(productId, quantity);
-    this.cartService.getCartData().subscribe((data: any) => {
-      if (data.cart) {
-        this.cartItems = data.cart.cartItems;
-        this.cartDetails = data.cart;
+       this.cartService.cartUpdate(productId, quantity);
+       this.cartService.getCartData().subscribe((data: any) => {
+         if (data) {
+           this.cartItems = data.cartItems;
+           this.cartDetails = data;
+          }
+          localStorage.setItem('cart', JSON.stringify(this.cartDetails));
+        });
       }
-      localStorage.setItem('cart', JSON.stringify(this.cartDetails));
-    });
-  }
+  // }
 }

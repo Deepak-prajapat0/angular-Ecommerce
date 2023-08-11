@@ -15,6 +15,7 @@ export class CheckoutComponent {
   constructor(
     private router: Router,
     private orderService: OrderService,
+    private cartService:CartService,
     private toastr: ToastrService
   ) {}
 
@@ -29,7 +30,7 @@ export class CheckoutComponent {
   ngOnInit(): void {
     let cart = localStorage.getItem('cart');
     if (cart) {
-      this.cartDetails = JSON.parse(cart).cart;
+      this.cartDetails = JSON.parse(cart);
       console.log(this.cartDetails)
       if (this.cartDetails.cartItems.length === 0) {
         this.router.navigate(['/cart']);
@@ -90,6 +91,7 @@ export class CheckoutComponent {
      this.orderService.placeOrder(this.form.value).subscribe((data: any) => {
        if (data) {
          localStorage.removeItem('cart');
+         this.cartService.getUserCart()
          this.toastr.success(data.msg)
          setTimeout(() => {
            this.router.navigate(['/order'])

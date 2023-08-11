@@ -56,7 +56,7 @@ import { StripePayment } from './stripe/stripe.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      timeOut: 2500,
+      timeOut: 1500,
       positionClass: 'toast-top-center',
       progressBar: true,
       closeButton: true,

@@ -23,24 +23,30 @@ export class HeaderComponent {
     private loggerService: LoggerService,
     private authService: AuthService,
     private cartService: CartService
-  ) {}
+  ) {
+    
+  }
   loggedIn: boolean = false;
   count: number = 0;
   open: boolean = false;
 
   ngOnInit() {
-  //   let cart = localStorage.getItem('cart');
-  //   if (cart) {
-  //    let localCart = JSON.parse(cart)      
-  //     this.count = localCart.totalItems;
-  //   }
-  //  else{
-     this.cartService.getCartData().subscribe((data: any) => {
-       if (data) {
-         this.count = data.totalItems;
-       }
-     });
-  //  }
+    let cart = localStorage.getItem('cart');
+
+    if (cart) {
+      this.count = JSON.parse(cart).totalItems;
+      this.cartService.getCartData().subscribe((data: any) => {
+        if (data.totalItems) {
+          this.count = data.totalItems;
+        }
+      });
+    } else {
+      this.cartService.getCartData().subscribe((data: any) => {
+        if (data) {
+          this.count = data.totalItems;
+        }
+      });
+    }
     this.router.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem('token')) {

@@ -18,7 +18,7 @@ export class BestsellingComponent {
     });
   }
 
-  productDetails(id:string){
-      this.router.navigateByUrl(`/product/${id}`)
+  productDetails(title:string){
+      this.router.navigateByUrl(`/product/${title}`)
   }
 }

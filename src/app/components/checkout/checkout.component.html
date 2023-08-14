@@ -1,4 +1,4 @@
-<!-- <div class="d-flex p-3 flex-column flex-md-row align-items-center">
+<div class="d-flex p-3 flex-column flex-md-row align-items-center">
     <div>
         <h1 class="ps-5 pt-1">Shipping address</h1>
         
@@ -84,12 +84,13 @@
             <span>Total</span>
             <span>{{cartDetails.totalPrice}}</span>
         </div>
-        <button class=" order  btn btn-primary w-75" [disabled]="form.status === 'INVALID'"   [class.click]="isClassAdded" (keyup.enter)="placeOrder()"  (click)="placeOrder()">
+                <payment-form [order]="cartItems" [form]="form" ></payment-form>
+        <!-- <button class=" order  btn btn-primary w-75" [disabled]="form.status === 'INVALID'"   [class.click]="isClassAdded" (keyup.enter)="placeOrder()"  (click)="placeOrder()">
             <span [class.textTransform]="isClassAdded"></span>
             <i class="bi bi-truck " [class.animateIcon]="isClassAdded"></i>
-        </button>
+        </button> -->
     </div>
-</div> -->
+</div>
 
 
-<button class="btn btn-primary">Paynow</button>
+<!-- <button class="btn btn-primary">Paynow</button> -->

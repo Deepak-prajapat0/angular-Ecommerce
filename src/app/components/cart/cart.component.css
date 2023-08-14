@@ -25,18 +25,7 @@ img{
     text-align: center;
     border: none;
 }
-.quantityBtn i{
-    padding: 5px 0;
-    border: 1px solid rgb(188, 188, 188);
-     border-radius: 6px;
-    transition: all .3s;
-}
-.quantityBtn i:hover{
-    color: rgb(0, 93, 200);
-    border: 1px solid rgb(61, 158, 255);
-    border-radius: 2rem;
-    transition: all .3s ease-in-out;
-}
+
 
 .bi-trash:hover{
     position: relative;
@@ -94,4 +83,18 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     font-size: 14px;
     color: rgb(87, 86, 86);
     overflow-y: hidden;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+
+  /* Add other styles to indicate disabled state */
+}
+
+.quantityBtn button{
+    padding: 5px 0;
+    border: 1px solid rgb(188, 188, 188);
+     border-radius: 6px;
+    transition: all .3s;
 }

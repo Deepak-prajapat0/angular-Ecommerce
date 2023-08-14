@@ -18,7 +18,7 @@ export class CheckoutComponent {
     private cartService:CartService,
     private toastr: ToastrService
   ) {}
-
+  cartItems:any[]=[]
   cartDetails: any;
   states: string[] = states;
   isClassAdded: boolean = false;
@@ -31,7 +31,7 @@ export class CheckoutComponent {
     let cart = localStorage.getItem('cart');
     if (cart) {
       this.cartDetails = JSON.parse(cart);
-      console.log(this.cartDetails)
+       this.cartItems = this.cartDetails.cartItems;
       if (this.cartDetails.cartItems.length === 0) {
         this.router.navigate(['/cart']);
       }

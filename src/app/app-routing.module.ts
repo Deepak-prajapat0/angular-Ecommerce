@@ -13,9 +13,11 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ForgotpasswordComponent } from './components/forms/forgotpassword/forgotpassword.component';
 import { UpdatepasswordComponent } from './components/forms/updatepassword/updatepassword.component';
 import { OrderDetailsComponent } from './components/order-details/orderDetails.component';
-import { AboutComponent } from './components/about/about.component';
-import { ContactusComponent } from './components/contactus/contactus.component';
-import { StripePayment } from './stripe/stripe.component';
+import { AboutComponent } from './components/partials/about/about.component';
+import { ContactusComponent } from './components/partials/contactus/contactus.component';
+import { StripePayment } from './components/partials/stripe/stripe.component';
+import { PaymentsuccessComponent } from './components/partials/paymentsuccess/paymentsuccess.component';
+import { PaymentfailedComponent } from './components/partials/paymentfailed/paymentfailed.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,6 +34,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactusComponent },
   { path: 'stripe', component: StripePayment },
+  { path: 'success', component: PaymentsuccessComponent },
+  { path: 'failed', component: PaymentfailedComponent },
   { path: '**', component: WrongurlComponent },
 ];
 

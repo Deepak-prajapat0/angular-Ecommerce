@@ -4,10 +4,10 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './components/partials/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { BestsellingComponent } from './components/home/bestselling/bestSelling.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterComponent } from './components/partials/footer/footer.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductdetailComponent } from './components/products/productdetail/productdetail.component';
 import { LoginComponent } from './components/login/login.component';
@@ -22,9 +22,11 @@ import { ForgotpasswordComponent } from './components/forms/forgotpassword/forgo
 import { UpdatepasswordComponent } from './components/forms/updatepassword/updatepassword.component';
 import { OrderDetailsComponent } from './components/order-details/orderDetails.component';
 import { TokenInterceptorService } from './JwtInterceptor';
-import { AboutComponent } from './components/about/about.component';
-import { ContactusComponent } from './components/contactus/contactus.component';
-import { StripePayment } from './stripe/stripe.component';
+import { AboutComponent } from './components/partials/about/about.component';
+import { ContactusComponent } from './components/partials/contactus/contactus.component';
+import { StripePayment } from './components/partials/stripe/stripe.component';
+import { PaymentsuccessComponent } from './components/partials/paymentsuccess/paymentsuccess.component';
+import { PaymentfailedComponent } from './components/partials/paymentfailed/paymentfailed.component';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { StripePayment } from './stripe/stripe.component';
     OrderDetailsComponent,
     AboutComponent,
     ContactusComponent,
-    StripePayment
+    StripePayment,
+    PaymentsuccessComponent,
+    PaymentfailedComponent
   ],
   imports: [
     BrowserModule,

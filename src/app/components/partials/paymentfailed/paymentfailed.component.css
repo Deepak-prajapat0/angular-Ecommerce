@@ -1,0 +1,25 @@
+.container{
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+}
+
+.card{
+    padding-top: 1rem;
+    width: 20rem;
+    min-height: 8rem;
+    text-align: center;
+}
+.card-body > div{
+    padding: 1rem;
+    top: -2.5rem;
+     left: 37%;
+     border: 1px solid rgb(236, 20, 20);
+     border-radius: 50%;
+     color: white;
+     background-color: rgb(210, 51, 51);
+     font-size: 36px;
+}

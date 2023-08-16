@@ -5,6 +5,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { states } from '../../state';
 import { OrderService } from 'src/app/services/order.service';
 import { ToastrService } from 'ngx-toastr';
+import { LoggerService } from 'src/app/services/logger.service';
 
 @Component({
   selector: 'app-checkout',
@@ -14,20 +15,20 @@ import { ToastrService } from 'ngx-toastr';
 export class CheckoutComponent {
   constructor(
     private router: Router,
-    private orderService: OrderService,
-    private cartService:CartService,
-    private toastr: ToastrService
+    private loggerService:LoggerService
   ) {}
   cartItems:any[]=[]
   cartDetails: any;
   states: string[] = states;
   isClassAdded: boolean = false;
+  isLoggedIn:boolean =false
 
   addClass(): void {
     this.isClassAdded = true;
   }
 
   ngOnInit(): void {
+    this.isLoggedIn= this.loggerService.isLoggedin;
     let cart = localStorage.getItem('cart');
     if (cart) {
       this.cartDetails = JSON.parse(cart);
@@ -41,6 +42,8 @@ export class CheckoutComponent {
   }
 
   form = new FormGroup({
+    bname:new FormControl('', [Validators.required, Validators.minLength(3)]),
+    email:new FormControl('', [Validators.required, Validators.minLength(8)]),
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     phone: new FormControl('', [
       Validators.required,
@@ -60,6 +63,12 @@ export class CheckoutComponent {
     ]),
   });
 
+  get bname() {
+    return this.form.get('bname');
+  }
+  get email() {
+    return this.form.get('email');
+  }
   get name() {
     return this.form.get('name');
   }
@@ -82,22 +91,21 @@ export class CheckoutComponent {
     return this.form.get('pincode');
   }
 
-  placeOrder() {
-   if(this.form.errors){
-    return 
-   }
-   else{
-     this.addClass();
-     this.orderService.placeOrder(this.form.value).subscribe((data: any) => {
-       if (data) {
-         localStorage.removeItem('cart');
-         this.cartService.getUserCart()
-         this.toastr.success(data.msg)
-         setTimeout(() => {
-           this.router.navigate(['/order'])
-         }, 1500);
-       }
-     });
-   }
-  }
+  // placeOrder() {
+  //  if(this.form.errors){
+  //   return 
+  //  }
+  //  else{
+  //    this.orderService.placeOrder(this.form.value,this.cartDetails).subscribe((data: any) => {
+  //      if (data) {
+  //        localStorage.removeItem('cart');
+  //        this.cartService.getUserCart()
+  //        this.toastr.success(data.msg)
+  //        setTimeout(() => {
+  //          this.router.navigate(['/order'])
+  //        }, 1500);
+  //      }
+  //    });
+  //  }
+  // }
 }

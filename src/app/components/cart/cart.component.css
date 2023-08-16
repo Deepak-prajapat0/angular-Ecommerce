@@ -15,7 +15,6 @@ img{
 } */
 
 .quantityBtn{
-    padding: 6px;
     width: 7rem;
     display: flex;
     flex-direction: row; 

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +27,7 @@ import { ContactusComponent } from './components/partials/contactus/contactus.co
 import { StripePayment } from './components/partials/stripe/stripe.component';
 import { PaymentsuccessComponent } from './components/partials/paymentsuccess/paymentsuccess.component';
 import { PaymentfailedComponent } from './components/partials/paymentfailed/paymentfailed.component';
+import { OrderstatusComponent } from './components/orderstatus/orderstatus.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { PaymentfailedComponent } from './components/partials/paymentfailed/paym
     ContactusComponent,
     StripePayment,
     PaymentsuccessComponent,
-    PaymentfailedComponent
+    PaymentfailedComponent,
+    OrderstatusComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +69,9 @@ import { PaymentfailedComponent } from './components/partials/paymentfailed/paym
       preventDuplicates: true,
     }),
   ],
+  schemas: [
+        NO_ERRORS_SCHEMA
+      ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

@@ -1,10 +1,28 @@
-.quantityBtn{
+/* .quantityBtn{
     padding: 6px;
     width: 7rem;
     display: flex;
     flex-direction: row; 
     align-items: center;
+} */
+
+#contact{
+    padding: 0 10px;
+    min-width: 18rem;
 }
+.login{
+    margin-top: 2rem;
+}
+
+.divider{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.divider hr{
+    width: 3rem;
+}
+
 .summery{
     display: flex;
     flex-direction: row;
@@ -75,4 +93,8 @@
     max-width: 30rem;
     height: 3rem;
     overflow-y: hidden;
+}
+
+.login-btn{
+    width: 10rem;
 }

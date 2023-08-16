@@ -7,6 +7,7 @@ import { LoggerService } from 'src/app/services/logger.service';
 const routerLinks = [
   { name: 'Home', link: '/' },
   { name: 'Products', link: '/products' },
+  { name: 'Track order', link: '/track-order' },
   { name: 'About', link: '/about' },
   { name: 'Contact-us', link: '/contact' },
 ];

@@ -18,6 +18,7 @@ import { ContactusComponent } from './components/partials/contactus/contactus.co
 import { StripePayment } from './components/partials/stripe/stripe.component';
 import { PaymentsuccessComponent } from './components/partials/paymentsuccess/paymentsuccess.component';
 import { PaymentfailedComponent } from './components/partials/paymentfailed/paymentfailed.component';
+import { OrderstatusComponent } from './components/orderstatus/orderstatus.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,8 +29,9 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'products/:title', component: ProductdetailComponent },
   { path: 'cart',  component: CartComponent },
-  { path: 'checkout', canActivate: [authGuard], component: CheckoutComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: 'order', canActivate: [authGuard],component: OrdersComponent },
+  { path: 'track-order',component: OrderstatusComponent },
   { path: 'order/:orderId', canActivate: [authGuard], component: OrderDetailsComponent},
   { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactusComponent },

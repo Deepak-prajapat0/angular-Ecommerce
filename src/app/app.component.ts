@@ -9,6 +9,7 @@ import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStar
 export class AppComponent {
   title = 'angular-Ecommerce-task';
 
+
   loading = false;
   constructor(private router: Router) {
      this.router.events.subscribe((event: Event) => {

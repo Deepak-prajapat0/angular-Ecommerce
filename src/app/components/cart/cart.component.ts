@@ -54,7 +54,7 @@ export class CartComponent {
     });
      setTimeout(() => {
        this.selected = false;
-      //  this.selectedItemIndex = null;
+       this.selectedItemIndex = null;
        this.loading = false;
      }, 2500);
   }

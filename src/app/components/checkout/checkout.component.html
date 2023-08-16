@@ -1,11 +1,41 @@
-<div class="d-flex p-3 flex-column flex-md-row align-items-center">
+<div class="d-flex p-3 flex-column flex-md-row align-items-top">
     <div>
-        <h1 class="ps-5 pt-1">Shipping address</h1>
+        <div  class=" p-sm-3 d-flex flex-column justify-content-start gap-5">
+         
+            <div id="contact">
+                <div  class="login d-flex flex-column gap-1" *ngIf="!isLoggedIn">
+                    <a routerLink="/login">Already a customer ?</a>
+                    <span class="divider">
+                        <hr><span>or</span>
+                        <hr>
+                    </span>
+                </div>
+                <h2 *ngIf="!isLoggedIn">Contact Information</h2>
+                <form class="d-flex flex-column gap-2" [formGroup]="form">
+                <div *ngIf="!isLoggedIn">
+                    <label for="bname" class="form-label">Name</label>
+                    <input type="name" class="form-control" id="bname" formControlName="bname">
+                    <div *ngIf="bname && bname.touched" class="input-error">
+                        <span *ngIf="bname.errors?.['required'] ">Enter Name</span>
+                        <span *ngIf="bname?.errors?.['minlength'] ">bname length should be min 3 letter</span>
+                    </div>
+                </div>
+                <div *ngIf="!isLoggedIn">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" formControlName="email">
+                    <div *ngIf="email && email.touched" class="input-error">
+                        <span *ngIf="email.errors?.['required'] ">Enter email</span>
+                        <span *ngIf="email?.errors?.['minlength'] ">email length should be min 3 letter</span>
+                    </div>
+                </div>
         
-            <form class="row g-2 p-4" [formGroup]="form"  >
+ 
+        
+            <h1 class="ps-5 pt-1">Shipping address</h1>
+        
                 <div class="col-sm-6">
                     <label for="name" class="form-label">name</label>
-                    <input type="name" class="form-control" id="name"  formControlName="name" >
+                    <input type="name" class="form-control" id="name" formControlName="name">
                     <div *ngIf="name && name.touched" class="input-error">
                         <span *ngIf="name.errors?.['required'] ">Enter name</span>
                         <span *ngIf="name?.errors?.['minlength'] ">name length should be min 3 letter</span>
@@ -21,7 +51,7 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="house" class="form-label">House</label>
-                    <input type="text" class="form-control" id="house" placeholder="1234 Main St" formControlName="house" >
+                    <input type="text" class="form-control" id="house" placeholder="1234 Main St" formControlName="house">
                     <div *ngIf="house && house.touched" class="input-error">
                         <span *ngIf="house.errors?.['required'] ">Enter house number</span>
                         <span *ngIf="house?.errors?.['minlength'] ">Enter valid house number</span>
@@ -29,7 +59,8 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="address" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="Near new building , main road" formControlName="street" >
+                    <input type="text" class="form-control" id="address" placeholder="Near new building , main road"
+                        formControlName="street">
                     <div *ngIf="street && street.touched" class="input-error">
                         <span *ngIf="street.errors?.['required'] ">Enter Address</span>
                         <span *ngIf="street?.errors?.['minlength'] ">Enter minimum 6 character</span>
@@ -54,18 +85,18 @@
                         <span *ngIf="state?.errors?.['minlength'] ">Enter valid state</span>
                     </div>
                 </div>
-                <div class="col-sm-6" >
+                <div class="col-sm-6">
                     <label for="pincode" class="form-label">Pincode</label>
-                    <input type="text"  class="form-control" id="pincode" maxlength="6" formControlName="pincode" >
+                    <input type="text" class="form-control" id="pincode" maxlength="6" formControlName="pincode">
                     <div *ngIf="pincode && pincode.touched" class="input-error">
                         <span *ngIf="pincode.errors?.['required'] ">Enter pincode</span>
                         <span *ngIf="pincode?.errors?.['minlength'] || pincode?.errors?.['pattern'] ">Enter valid pincode </span>
                     </div>
                 </div>
             </form>
-        
+        </div>       
     </div>
-    <div style="min-width: 20rem; max-width: 28rem; padding: 5px; margin: 5px;  border: 1px solid rgb(206, 208, 209); text-align: center;">
+    <div class="my-sm-5" style="min-width: 20rem; max-width: 28rem; height: max-content; padding: 5px; margin: 5px;  border: 1px solid rgb(206, 208, 209); text-align: center;">
         <h2>Cart Summery</h2>
         <div class="summery">
             <span>Subtotal</span>
@@ -84,7 +115,7 @@
             <span>Total</span>
             <span>{{cartDetails.totalPrice}}</span>
         </div>
-                <payment-form [order]="cartItems" [form]="form" ></payment-form>
+                <payment-form [order]="cartDetails" [form]="form.value"></payment-form>
         <!-- <button class=" order  btn btn-primary w-75" [disabled]="form.status === 'INVALID'"   [class.click]="isClassAdded" (keyup.enter)="placeOrder()"  (click)="placeOrder()">
             <span [class.textTransform]="isClassAdded"></span>
             <i class="bi bi-truck " [class.animateIcon]="isClassAdded"></i>

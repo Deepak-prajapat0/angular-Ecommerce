@@ -29,8 +29,8 @@ export class OrderService {
     return this.http.get(this.url + '/order/' + orderId);
   }
 
-  placeOrder(form: any) {
-    return this.http.post(this.url + '/order', form);
+  placeOrder(form: any,order:any) {
+    return this.http.post(this.url + '/order', {form,order});
   }
 
   cancelItemFromOrder(orderId: string, productId: string) {

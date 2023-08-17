@@ -22,9 +22,10 @@ export class AuthService {
   count: number = 0;
 
   login(data: any) {
-    return this.http.post(this.url + '/login', data).subscribe((res: any) => {
+    return this.http.post(`${this.url}/login`, data).subscribe((res: any) => {
       localStorage.setItem('token', res.token);
       this.router.navigate(['/']);
+      // this.cartService.getUserCart()
       this.cartService.storeLocalCart();
       this.loggerService.isLoggedin = true;
       this.toastr.success(res.msg);
@@ -32,7 +33,7 @@ export class AuthService {
   }
   signup(data: any) {
     return this.http
-      .post(this.url + '/register', data)
+      .post(`${this.url}/register`, data)
       .subscribe((res: any) => {
         localStorage.setItem('token', res.token);
          this.cartService.storeLocalCart();
@@ -50,12 +51,12 @@ export class AuthService {
   }
 
   forgotPassword(email: any) {
-    return this.http.post(this.url + '/forgetpassword', { email: email });
+    return this.http.post(`${this.url}/forgetpassword`, { email: email });
   }
 
   updatePassword(form: any, emailToken: string) {
     return this.http
-      .put(this.url + '/updatepassword/' + emailToken, form)
+      .put(`${this.url}/updatepassword/${emailToken}`, form)
       .subscribe((res: any) => {
         this.toastr.success(res.msg);
         this.router.navigate(['/login']);

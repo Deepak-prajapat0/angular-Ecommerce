@@ -20,9 +20,9 @@
                     <div>
                         <h5>{{items.productId.title}}</h5>
                         <h6 class="item-description">{{items.productId.description}}</h6>
-                        <div class="quantityBtn" (click)="selectItem(i)" >
+                        <div class="quantityBtn"  >
                                 <button  [disabled]="selectedItemIndex === i" [ngClass]="{ 'disabled': selectedItemIndex === i }" (click)="cartUpdate(items.productId._id,items.quantity-1)"><i class="bi bi-dash-lg px-2" ></i></button>
-                            <input type="text" class="w-100" value="{{items.quantity}}" disabled>
+                            <input type="text" name="count" class="w-100 pe-none" value="{{items.quantity}}" disabled>
                                 <button [disabled]="selectedItemIndex === i" [ngClass]="{ 'disabled': selectedItemIndex === i }" (click)="cartUpdate(items.productId._id,items.quantity+1)"><i class="bi bi-plus-lg px-2"></i></button>
                              
                         </div>

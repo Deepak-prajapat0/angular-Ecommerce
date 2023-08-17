@@ -27,7 +27,7 @@ import { ContactusComponent } from './components/partials/contactus/contactus.co
 import { StripePayment } from './components/partials/stripe/stripe.component';
 import { PaymentsuccessComponent } from './components/partials/paymentsuccess/paymentsuccess.component';
 import { PaymentfailedComponent } from './components/partials/paymentfailed/paymentfailed.component';
-import { OrderstatusComponent } from './components/orderstatus/orderstatus.component';
+import { TrackorderComponent } from './components/trackorder/trackorder.component';
 
 
 @NgModule({
@@ -53,7 +53,7 @@ import { OrderstatusComponent } from './components/orderstatus/orderstatus.compo
     StripePayment,
     PaymentsuccessComponent,
     PaymentfailedComponent,
-    OrderstatusComponent
+    TrackorderComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +66,7 @@ import { OrderstatusComponent } from './components/orderstatus/orderstatus.compo
       positionClass: 'toast-top-center',
       progressBar: true,
       closeButton: true,
-      preventDuplicates: true,
+      preventDuplicates: false,
     }),
   ],
   schemas: [

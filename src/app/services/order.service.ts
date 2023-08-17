@@ -22,23 +22,26 @@ export class OrderService {
   }
 
   getUserOrder(): Observable<any> {
-    return this.http.get(this.url + '/order');
+    return this.http.get(`${this.url}/order`);
   }
 
   getOrderDetails(orderId: string) {
-    return this.http.get(this.url + '/order/' + orderId);
+    return this.http.get(`${this.url}/order/${orderId}`);
+  }
+  trackOrder(orderId: string) {
+    return this.http.get(`${this.url}/track/${orderId}`);
   }
 
   placeOrder(form: any,order:any) {
-    return this.http.post(this.url + '/order', {form,order});
+    return this.http.post(`${this.url}/order`, {form,order});
   }
 
   cancelItemFromOrder(orderId: string, productId: string) {
-    return this.http.put(this.url + '/order/' + orderId, { productId });
+    return this.http.put(`${this.url}/order/${orderId}`, { productId });
   }
 
   cancelOrder(orderId: string) {
-    return this.http.put(this.url + '/order/cancel/' + orderId, {});
+    return this.http.put(`${this.url}/order/cancel/${orderId}`, {});
   }
 
 }

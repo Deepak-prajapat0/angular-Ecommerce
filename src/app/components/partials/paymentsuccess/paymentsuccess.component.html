@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container p-5">
     <div class="card">
         <div class="card-body">
             <div class="position-absolute ">
@@ -6,7 +6,13 @@
             </div>
             <h2>Thank you!</h2>
             <h6>Your payment is successful</h6>
-            <button class="btn btn-primary w-75 btn-sm mt-3" routerLink="/order">My Orders</button>
+            <button *ngIf="loggedIn" class="btn btn-primary w-75 btn-sm mt-3" routerLink="/order">My Orders</button>
+            <div *ngIf="!loggedIn && orderId">
+                <span>Your OrderId is </span>
+                <span>{{orderId}}</span>
+                <button class="btn btn-primary w-75 btn-sm mt-3" routerLink="/track">Track Here</button>
+            </div>
+
         </div>
     </div>
 </div>

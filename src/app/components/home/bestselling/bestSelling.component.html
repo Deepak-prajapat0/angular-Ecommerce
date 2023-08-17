@@ -5,7 +5,7 @@
     <div class="col  p-2" *ngFor="let product of products">
             <div  class="card" [routerLink]="['/products',product.title]">
             <img class="card-img-top" style="height: 6rem;" src="{{product.thumbnail}}" alt="{{product.title}}">
-            <div class="card-body">
+            <div class="card-body p-2">
                 <h5 class="card-title" style="font-size: 12px; font-weight: 900;">{{product.brand}}</h5>
                 <h6 class="card-title text-truncate small">{{product.title}}</h6>
                 <p class="card-text text-body-secondary overflow-y-hidden" style="height: 2.5rem; font-size: 14px;">{{product.description}}</p>

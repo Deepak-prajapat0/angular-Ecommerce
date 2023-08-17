@@ -49,12 +49,12 @@ export class CartComponent {
       if (data) {
         this.cartItems = data.cartItems;
         this.cartDetails = data;
+        this.selectedItemIndex = null;
+        this.selected = false;
       }
       localStorage.setItem('cart', JSON.stringify(this.cartDetails));
     });
      setTimeout(() => {
-       this.selected = false;
-       this.selectedItemIndex = null;
        this.loading = false;
      }, 2500);
   }

@@ -11,16 +11,16 @@ export class ProductService {
   url: string = environment.API_URL;
 
   getAllProducts(): Observable<any> {
-    return this.http.get(this.url + '/products');
+    return this.http.get(`${this.url}/products`);
   }
 
   getFilteredProducts(query: string): Observable<any> {
-    return this.http.get(this.url + `/products/search/${query}`);
+    return this.http.get(`${this.url}/products/search/${query}`);
   }
   getLimitedProducts(): Observable<any> {
-    return this.http.get(this.url + '/best-products');
+    return this.http.get(`${this.url}/best-products`);
   }
   getProductById(title: string): Observable<any> {
-    return this.http.get(this.url + `/products/${title}`);
+    return this.http.get(`${this.url}/products/${title}`);
   }
 }

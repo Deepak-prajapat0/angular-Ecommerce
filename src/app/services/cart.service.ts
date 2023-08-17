@@ -28,6 +28,8 @@ export class CartService {
 
   getUserCart(): void {
     let cart = localStorage.getItem('cart');
+    console.log(cart,"hfghfghfg");
+    
     if (!localStorage.getItem('token') || !this.loggerService.isLoggedin) {
       if (cart) {
         this.cartData = JSON.parse(cart);
@@ -39,7 +41,7 @@ export class CartService {
         return this.cartDataSubject.next(this.cartData); //
       }
     } else {
-      this.http.get(this.url + '/cart').subscribe((response: any) => {
+      this.http.get(`${this.url}/cart`).subscribe((response: any) => {
         this.cartData = response.cart; // Assuming the API response is an array of cart items
         this.cartDataSubject.next(this.cartData); // Emit the updated cart data
         localStorage.setItem('cart', JSON.stringify(this.cartData));
@@ -51,8 +53,7 @@ export class CartService {
    let cart = localStorage.getItem('cart')
     if(cart){
       cart= JSON.parse(cart)
-       this.http
-        .put(this.url + '/cart-local', this.cartData)
+       this.http.put(`${this.url}/cart-local`, this.cartData)
         .subscribe((response: any) => {
           this.cartData = response.cart; // Assuming the API response is an array of cart items
           localStorage.setItem('cart', JSON.stringify(this.cartData));
@@ -106,8 +107,7 @@ export class CartService {
     } 
     //  if user is logged in 
     else {
-      this.http
-        .post(this.url + '/cart', { id: data._id })
+      this.http.post(`${this.url}/cart`, { id: data._id })
         .subscribe((response: any) => {
           this.cartData = response.cart; // Assuming the API response is an array of cart items
           this.cartDataSubject.next(this.cartData); // Emit the addto cart data
@@ -159,8 +159,7 @@ export class CartService {
     }
     //  if user logged in 
     else {     
-      this.http
-        .put(this.url + '/cart', { productId: data, quantity })
+      this.http.put(`${this.url}/cart`, { productId: data, quantity })
         .subscribe((response: any) => {
           this.cartData = response.cart; // Assuming the API response is an array of cart items
           this.cartDataSubject.next(this.cartData); // Emit the updated cart data

@@ -1,0 +1,54 @@
+<div class=" pt-5 m-2">
+    <div class="card" style="max-width: 22rem; margin: auto;">
+        <div class="card-body text-center">
+            <h4>Track your order here</h4>
+            <div class="form-floating mt-4 mb-3">
+                <input type="text" class="form-control" id="floatingEmail" #orderId placeholder="">
+                <label for="floatingEmail">Order Id *</label>
+            </div>
+            <button class="btn btn-primary" (click)="submit(orderId.value)">check status</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="order">
+   <div class="py-4 p-3 d-flex flex-sm-row flex-column justify-content-around">
+    <div class="d-flex flex-column gap-1">
+        <h2>Customer Details</h2>
+        <span>Name : {{order.name}}</span>
+        <span>Email : {{order.email}}</span>
+        <br>
+        <span class="text-bg-warning rounded-pill" style="width: max-content; padding: 5px 3rem;">{{order.status}}</span>
+        <span>Expected to be deliver in 4 days</span>
+    </div>
+    <br>
+    <div class="py-3 d-flex flex-column gap-1">
+        <h3>Shipping details</h3>
+        <span>Name : {{order.shippingDetails.name}}</span>
+        <span>Phone : {{order.shippingDetails.phone}}</span>
+    
+        <b>Ship to:</b>
+        <div class="shippingDetails">
+            <span>#{{order.shippingDetails.address.house}}</span>
+            <span>{{order.shippingDetails.address.street}}</span>
+            <span>{{order.shippingDetails.address.city}}</span>
+            <span>{{order.shippingDetails.address.state}}
+                ({{order.shippingDetails.address.pincode}})</span>
+        </div>
+    </div>
+   </div>
+    <br>
+    <div class="product" *ngFor="let item of order.orderDetails.products">
+        <div class="card m-2">
+            <div class="card-body" class="p-2 d-flex flex-row gap-2">
+                <img src="{{item.productId.thumbnail}}" alt="" style="height:5rem; width: 5rem;">
+                <div class="d-flex flex-column w-50">
+                    <h5 class="card-title">{{item.productId.title}}</h5>
+                    <span class="card-text">{{item.productId.description}}</span>
+                </div>
+                <div class="ms-auto d-flex flex-column justify-content-between">
+                    <span><i class="bi bi-currency-rupee"></i>{{item.productId.price}} x {{item.quantity}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

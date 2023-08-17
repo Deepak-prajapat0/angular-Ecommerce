@@ -18,7 +18,6 @@ export class StripePayment {
   @Input()
   form!:any
  
-  
   handler: any;
   loading:boolean =false
 

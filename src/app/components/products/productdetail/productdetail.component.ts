@@ -44,7 +44,7 @@ export class ProductdetailComponent {
       this.cartService.getCartData().subscribe((res) => {
         setTimeout(() => {
           this.loading = false;
-        }, 2000);
+        }, 1500);
       });
   }
 }

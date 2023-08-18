@@ -27,9 +27,7 @@ export class CartService {
   }
 
   getUserCart(): void {
-    let cart = localStorage.getItem('cart');
-    console.log(cart,"hfghfghfg");
-    
+    let cart = localStorage.getItem('cart');    
     if (!localStorage.getItem('token') || !this.loggerService.isLoggedin) {
       if (cart) {
         this.cartData = JSON.parse(cart);
@@ -74,10 +72,16 @@ export class CartService {
         //  if item is already present in cart
         if (cartItemIndex >= 0) {
           let product = localCart.cartItems[cartItemIndex];
-          product.quantity += 1;
-          localCart.totalItems += 1;
-          localCart.totalPrice += product.productId.price;
-          this.cartData = localCart;          
+          if(product.productId.stock === product.quantity){
+            this.toastr.warning("you have already added maximum quantity")
+          }
+          else{
+           product.quantity += 1;
+           localCart.totalItems += 1;
+           localCart.totalPrice += product.productId.price;
+           this.cartData = localCart; 
+           this.toastr.success('product added to cart');
+          }         
           localStorage.setItem('cart', JSON.stringify(this.cartData));
           return this.cartDataSubject.next(this.cartData);
         }
@@ -138,11 +142,15 @@ export class CartService {
            return this.cartDataSubject.next(localCart);
         }
         //  if user increase quantity
-        else if (quantity > product.quantity) {          
-          product.quantity += 1;
-          localCart.totalItems += 1;
-          localCart.totalPrice += product.productId.price;
-          this.cartData = localCart;
+        else if (quantity > product.quantity) {      
+           if (product.productId.stock === product.quantity) {
+             this.toastr.warning('you have already added maximum quantity');
+           } else {
+             product.quantity += 1;
+             localCart.totalItems += 1;
+             localCart.totalPrice += product.productId.price;
+             this.cartData = localCart;
+           }
           localStorage.setItem('cart', JSON.stringify(localCart));
           return this.cartDataSubject.next(localCart);
         }

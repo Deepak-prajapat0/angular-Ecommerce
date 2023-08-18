@@ -3,14 +3,20 @@
         <div class="card-body text-center">
             <h4>Track your order here</h4>
             <div class="form-floating mt-4 mb-3">
-                <input type="text" class="form-control" id="floatingEmail" #orderId placeholder="">
+                <input type="text" class="form-control" id="floatingId" #orderId placeholder="Enter orderid">
+                <label for="floatingId">Order Id *</label>
+            </div>
+            <div class="form-floating mt-4 mb-3">
+                <input type="email" class="form-control" id="floatingEmail" #email placeholder="abc@gmail.com">
                 <label for="floatingEmail">Order Id *</label>
             </div>
-            <button class="btn btn-primary" (click)="submit(orderId.value)">check status</button>
+            <button class="btn btn-primary" (click)="submit(orderId.value,email.value)">check status</button>
         </div>
     </div>
 </div>
-<div *ngIf="order">
+<div *ngIf="order" class="pb-5">
+    <br>
+    <hr>
    <div class="py-4 p-3 d-flex flex-sm-row flex-column justify-content-around">
     <div class="d-flex flex-column gap-1">
         <h2>Customer Details</h2>

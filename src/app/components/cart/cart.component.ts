@@ -51,8 +51,8 @@ export class CartComponent {
         this.cartDetails = data;
         this.selectedItemIndex = null;
         this.selected = false;
+        localStorage.setItem('cart', JSON.stringify(this.cartDetails));
       }
-      localStorage.setItem('cart', JSON.stringify(this.cartDetails));
     });
      setTimeout(() => {
        this.loading = false;

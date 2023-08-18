@@ -9,8 +9,8 @@ import { OrderService } from 'src/app/services/order.service';
 export class TrackorderComponent {
   constructor(private orderService:OrderService){}
   order:any;
-  submit(id:any){
-    this.orderService.trackOrder(id).subscribe((res:any)=>{
+  submit(id:any,email:string){
+    this.orderService.trackOrder(id,email).subscribe((res:any)=>{
       this.order=res.order
     })
   }

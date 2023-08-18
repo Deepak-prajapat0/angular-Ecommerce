@@ -13,12 +13,12 @@
     <div class="w-100">
         <h1 class="text-center">My shopping bag</h1>
         <div class="d-flex flex-column gap-2">
-            <div *ngFor="let items of cartItems; let i = index"    
+            <div *ngFor="let items of cartItems; let i = index"   
          class="items  card d-flex flex-row gap-2 px-2  justify-content-between border">
                 <div    class="card-body p-1 d-flex flex-row gap-2">
-                    <img src="{{items.productId.thumbnail}}" alt="{{items.productId.title}}">
+                    <img src="{{items.productId.thumbnail}}" alt="{{items.productId.title}}" [routerLink]="['/products',items.productId.title]" >
                     <div>
-                        <h5>{{items.productId.title}}</h5>
+                        <h5 [routerLink]="['/products',items.productId.title]">{{items.productId.title}}</h5>
                         <h6 class="item-description">{{items.productId.description}}</h6>
                         <div class="quantityBtn"  >
                                 <button  [disabled]="selectedItemIndex === i" [ngClass]="{ 'disabled': selectedItemIndex === i }" (click)="cartUpdate(items.productId._id,items.quantity-1)"><i class="bi bi-dash-lg px-2" ></i></button>

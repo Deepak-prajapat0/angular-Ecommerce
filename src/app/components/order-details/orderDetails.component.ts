@@ -41,7 +41,6 @@ export class OrderDetailsComponent {
           this.toastr.success(data.msg);
           this.loading = false;
           this.notFound = true;
-          
         }
       });
   }

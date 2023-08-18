@@ -6,8 +6,11 @@
                 <hr><span>or</span>
                 <hr>
             </span>
+            <h4 class="text-decoration-underline">Continue as Guest</h4>
+            <span>(Order tracking link will be sent to your email)</span>
+            <br>
         </div>
-        <h2 *ngIf="!isLoggedIn">Contact Information</h2>
+        <h3 *ngIf="!isLoggedIn">Contact Information</h3>
         <form class="d-flex flex-column gap-2" [formGroup]="form">
             <div *ngIf="!isLoggedIn">
                 <label for="bname" class="form-label">Name</label>
@@ -26,7 +29,7 @@
                 </div>
             </div>
             <div class="row">
-                <h1 class="ps-5 pt-1">Shipping address</h1>
+                <h3 class="pt-1">Shipping address</h3>
                 <div class="col-sm-6">
                     <label for="name" class="form-label">name</label>
                     <input type="name" class="form-control" id="name" formControlName="name">
@@ -113,6 +116,6 @@
             <span>Total</span>
             <span>{{cartDetails.totalPrice}}</span>
         </div>
-        <payment-form [order]="cartDetails" [form]="form.value"></payment-form>
+        <payment-form [order]="cartDetails" [form]="form.value" [formStatus]="form.status"></payment-form>
     </div>
 </div>

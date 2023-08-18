@@ -28,8 +28,8 @@ export class OrderService {
   getOrderDetails(orderId: string) {
     return this.http.get(`${this.url}/order/${orderId}`);
   }
-  trackOrder(orderId: string) {
-    return this.http.get(`${this.url}/track/${orderId}`);
+  trackOrder(orderId: string,email:string) {
+    return this.http.get(`${this.url}/track/${orderId}/${email}`);
   }
 
   placeOrder(form: any,order:any) {

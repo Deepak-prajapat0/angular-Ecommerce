@@ -25,8 +25,8 @@ export class AuthService {
     return this.http.post(`${this.url}/login`, data).subscribe((res: any) => {
       localStorage.setItem('token', res.token);
       this.router.navigate(['/']);
-      // this.cartService.getUserCart()
       this.cartService.storeLocalCart();
+      this.cartService.getUserCart()
       this.loggerService.isLoggedin = true;
       this.toastr.success(res.msg);
     });
@@ -36,7 +36,8 @@ export class AuthService {
       .post(`${this.url}/register`, data)
       .subscribe((res: any) => {
         localStorage.setItem('token', res.token);
-         this.cartService.storeLocalCart();
+        this.cartService.storeLocalCart();
+        this.cartService.getUserCart();
         this.router.navigate(['/']);
         this.loggerService.isLoggedin = true;
         this.toastr.success(res.msg);

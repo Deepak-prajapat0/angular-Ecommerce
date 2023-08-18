@@ -1,0 +1,1 @@
+<button [disabled]="formStatus === 'INVALID'" class="btn btn-primary w-75 m-auto mt-3 mb-2 d-flex flex-row gap-2 justify-content-center align-items-center" #paypal (click)="onPayment()"><span>Proceed to pay</span> <span *ngIf="loading" class="spinner-border spinner-border-sm" aria-hidden="true"></span><i *ngIf="!loading" class="bi bi-shield-lock"></i></button>

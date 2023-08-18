@@ -15,5 +15,6 @@
     font-size: 16px;
 }
 .product{
-    max-width: 55rem;
+    margin: auto;
+    max-width: 45rem;
 }

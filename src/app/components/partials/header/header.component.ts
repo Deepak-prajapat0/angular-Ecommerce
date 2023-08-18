@@ -28,7 +28,7 @@ export class HeaderComponent {
     
   }
   loggedIn: boolean = false;
-  count: number = 0;
+  count: number=0
   open: boolean = false;
 
   ngOnInit() {
@@ -40,8 +40,12 @@ export class HeaderComponent {
         if (data.totalItems) {
           this.count = data.totalItems;
         }
+        else{
+          this.count=0
+        }
       });
     } else {
+      this.count=0
       this.cartService.getCartData().subscribe((data: any) => {
         if (data) {
           this.count = data.totalItems;
@@ -53,8 +57,8 @@ export class HeaderComponent {
         if (localStorage.getItem('token')) {
           this.loggerService.isLoggedin = true;
           this.loggedIn = this.loggerService.isLoggedin;
-        } else {
-          this.count = 0;
+        } 
+        else {
           this.loggerService.isLoggedin = false;
           this.loggedIn = this.loggerService.isLoggedin;
         }
@@ -63,6 +67,7 @@ export class HeaderComponent {
   }
 
   logout() {
+    this.count =0
     this.authService.logout();
   }
 

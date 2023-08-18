@@ -42,8 +42,8 @@ export class CheckoutComponent {
   }
 
   form = new FormGroup({
-    bname:new FormControl('', [Validators.required, Validators.minLength(3)]),
-    email:new FormControl('', [Validators.required, Validators.minLength(8)]),
+    bname:new FormControl('', [Validators.minLength(3)]),
+    email:new FormControl('', [Validators.minLength(8)]),
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     phone: new FormControl('', [
       Validators.required,

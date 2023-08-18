@@ -1,15 +1,13 @@
 .container{
+    padding: 5rem 1rem;
     height: 80vh;
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items:center;
 }
 
 .card{
+    margin: auto;
     padding-top: 1rem;
-    width: 20rem;
+    max-width: 25rem;
     min-height: 8rem;
     text-align: center;
 }
@@ -17,10 +15,10 @@
     padding: 1rem;
     top: -3rem;
     width: 4.6rem;
-     left: 37%;
-     border: 1px solid rgb(4, 138, 255);
+     left: 38%;
+     border: 1px solid #0d6efd;
      border-radius: 50%;
      color: white;
-     background-color: rgb(0, 94, 255);
-     font-size: 32px;
+     background-color: #0d6efd;
+     font-size: 26px;
 }

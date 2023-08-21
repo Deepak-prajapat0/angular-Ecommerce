@@ -7,7 +7,24 @@
       >
         <a routerLink="{{ link.link }}" class="nav-link">{{ link.name }}</a>
       </li>
+      <li *ngIf="!loggedIn" class="flex-sm-fill text-sm-center nav-item">
+        <a routerLink="/track" class="nav-link">Track order</a>
+      </li>
     </ul>
+
+
+
+  <div class="nav-search" style="height: 2rem; width: 13.5rem;" >
+    <input type="text" #searchInput (keyup)="searchProduct($event)" (blur)="hideSearch()" placeholder="Search for products">
+    <ul class="suggested-search "
+      style="max-height: 10.5rem; z-index: 100;  background-color: rgb(255, 255, 255); overflow-y: hidden;z-index: 100; position: relative;   "
+      *ngIf="searchResult">
+      <li *ngFor="let item of searchResult" (mousedown)="redirectToDetails(item.title)">
+        <img src="{{item.thumbnail}}" alt=""> <a >{{item.title}}</a>
+      </li>
+    </ul>
+  
+  </div>
 
     <!-- menu button -->
     <i class="bi bi-list d-sm-none d-block fs-1" (click)="show()"></i>

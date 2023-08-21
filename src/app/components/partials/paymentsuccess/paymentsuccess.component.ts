@@ -30,8 +30,9 @@ export class PaymentsuccessComponent {
         if (res.paymentIntent == 'succeeded') {
           this.orderId = res.orderId;
         } 
-        localStorage.setItem('paymentIntent', JSON.stringify(res.paymentIntent));
+        localStorage.removeItem('paymentResponse');
         localStorage.removeItem('cart')
+        localStorage.setItem('cart',JSON.stringify({totalItems:0}))
       });
   }
 }

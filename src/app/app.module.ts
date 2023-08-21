@@ -30,6 +30,8 @@ import { PaymentfailedComponent } from './components/partials/paymentfailed/paym
 import { TrackorderComponent } from './components/trackorder/trackorder.component';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,

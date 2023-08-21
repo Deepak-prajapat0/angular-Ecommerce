@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from 'src/app/models/product.model';
@@ -15,36 +15,38 @@ export class ProductdetailComponent {
     private Arouter: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-    private toastr: ToastrService
-    ) {}
-    product!: Product;
-    image: string = '';
-    loading: boolean = false;
-    token: string = '';
-    
-    changeImg(img: string) {
-      this.image = img;
-    }
-  ngOnInit(): void {
-    this.token = localStorage.getItem('token') || '';
-    let paramId = this.Arouter.snapshot.paramMap.get('title');
-    if (paramId) {
-      this.loading = true;
-      this.productService.getProductById(paramId).subscribe((res) => {
-        this.product = res.product;
-        this.loading = false;
-      });
-    }
+    private toastr: ToastrService,
+    private cdr: ChangeDetectorRef
+  ) {}
+  product!: Product;
+  image: string = '';
+  loading: boolean = false;
+  token: string = '';
+
+  changeImg(img: string) {
+    this.image = img;
   }
 
 
+  ngOnInit(): void {
+    this.token = localStorage.getItem('token') || '';
+      this.Arouter.params.subscribe((params) => {
+        const title = params['title'];
+        this.productService.getProductById(title)
+        this.productService.getProduct().subscribe((res) => {
+          this.product = res.product;
+        });
+      })
+    this.cdr.detectChanges();
+  }
+
   addToCart(id: any) {
-      this.loading = true;
-      this.cartService.addToCart(id);
-      this.cartService.getCartData().subscribe((res) => {
-        setTimeout(() => {
-          this.loading = false;
-        }, 1500);
-      });
+    this.loading = true;
+    this.cartService.addToCart(id);
+    this.cartService.getCartData().subscribe((res) => {
+      setTimeout(() => {
+        this.loading = false;
+      }, 1500);
+    });
   }
 }

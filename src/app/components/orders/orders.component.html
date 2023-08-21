@@ -29,10 +29,11 @@
                         <span class="badge "
                          [class.bg-warning] = "order.status ==='completed'"
                          [class.bg-success] = "order.status ==='delivered'"
+                         [class.bg-danger] = "order.status ==='canceled'"
                          >
-                         {{order.status}}
+                         {{order.status|titlecase}}
                         </span>
-                        <button class="mt-2 btn btn-sm btn-primary" *ngIf="order.status==='completed'" title="View Details" [routerLink]="['/order',order._id]" >View Details</button>
+                        <button class="mt-2 btn btn-sm btn-primary"  title="View Details" [routerLink]="['/order',order._id]" >View Details</button>
                 </div>
             </div>
         </div>

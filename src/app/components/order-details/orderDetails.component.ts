@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -12,7 +12,8 @@ export class OrderDetailsComponent {
   constructor(
     private Arouter: ActivatedRoute,
     private orderService: OrderService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router:Router
   ) {}
   loading: boolean = false;
   notFound:boolean = false;
@@ -37,6 +38,9 @@ export class OrderDetailsComponent {
     this.loading = true
     this.orderService.cancelItemFromOrder(this.orderId, id).subscribe((data: any) => {
         if (data) {
+          if(data.order.status === "canceled"){
+            this.router.navigateByUrl('/order')
+          }
           this.orderDetail = data.order;
           this.toastr.success(data.msg);
           this.loading = false;
@@ -49,6 +53,9 @@ export class OrderDetailsComponent {
     this.loading = true;
     this.orderService.cancelOrder(id).subscribe((data: any) => {
       if (data) {
+         if (data.order.status === 'canceled') {
+           this.router.navigateByUrl('/order');
+         }
         this.orderDetail = data.order;
          this.toastr.success(data.msg);
         this.loading = false;

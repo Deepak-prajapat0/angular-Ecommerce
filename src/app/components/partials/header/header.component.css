@@ -23,6 +23,7 @@
 }
 
 .user-menu ul {
+  margin: 0px;
   width: 7rem;
   padding: 5px;
   display: flex;

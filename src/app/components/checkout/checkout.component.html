@@ -28,6 +28,14 @@
                     <span *ngIf="email?.errors?.['minlength'] ">email length should be min 3 letter</span>
                 </div>
             </div>
+            <div *ngIf="!isLoggedIn">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" formControlName="password">
+                <div *ngIf="password && password.touched" class="input-error">
+                    <span *ngIf="password.errors?.['required'] ">Enter password</span>
+                    <span *ngIf="password?.errors?.['minlength'] ">password length should be min 6 letter</span>
+                </div>
+            </div>
             <div class="row">
                 <h3 class="pt-1">Shipping address</h3>
                 <div class="col-sm-6">

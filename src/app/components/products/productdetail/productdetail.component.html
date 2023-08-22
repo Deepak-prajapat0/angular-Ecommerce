@@ -1,8 +1,8 @@
-<!-- <div *ngIf="!product " class="loader w-100  d-flex justify-content-center position-absolute " style="height: 100vh;">
+<div *ngIf="loading " class="loader w-100  d-flex justify-content-center position-absolute " style="height: 100vh;">
   <div class="spinner-border mx-auto" role="status" style="--bs-spinner-animation-speed: 0.45s;">
     <span class="visually-hidden">Loading...</span>
   </div>
-</div> -->
+</div>
 
 <div class="p-4 d-flex flex-column gap-2 align-items-center text-center fs-2" *ngIf="!product && !loading">
   <span>Product not found</span>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { debounce, debounceTime } from 'rxjs';
+import { debounce, debounceTime, distinctUntilChanged } from 'rxjs';
 import { Product } from 'src/app/models/product.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -31,7 +31,7 @@ export class HeaderComponent {
   ) {}
   loggedIn: boolean = false;
   count: number = 0;
-  open: boolean = true;
+  open: boolean = false;
   searchResult: any | undefined;
 
   ngOnInit() {
@@ -51,6 +51,9 @@ export class HeaderComponent {
       this.cartService.getCartData().subscribe((data: any) => {
         if (data) {
           this.count = data.totalItems;
+          if(!this.count){
+            this.count=0
+          }
         }
       });
     }
@@ -82,9 +85,20 @@ export class HeaderComponent {
   searchProduct(query: KeyboardEvent) {
     if (query) {
       const element = query.target as HTMLInputElement;
-        this.productService.getSearchProducts(element.value).subscribe((result) => {
-          this.searchResult = result;
-        })
+       if(element.value.length){
+         this.productService
+           .getSearchProducts(element.value)
+           .pipe(debounceTime(1000), distinctUntilChanged())
+           .subscribe((res) => {
+             this.searchResult = res;
+           });
+       }
+    }
+  }
+
+  search(query:String){
+    if(query.length){
+      this.router.navigate([`/products/search/${query}`]);
     }
   }
   hideSearch() {

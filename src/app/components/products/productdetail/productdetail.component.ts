@@ -27,26 +27,23 @@ export class ProductdetailComponent {
     this.image = img;
   }
 
-
   ngOnInit(): void {
     this.token = localStorage.getItem('token') || '';
-      this.Arouter.params.subscribe((params) => {
-        const title = params['title'];
-        this.productService.getProductById(title)
-        this.productService.getProduct().subscribe((res) => {
-          this.product = res.product;
-        });
-      })
+    this.Arouter.params.subscribe((params) => {
+      this.image=''
+      this.loading = true;
+      const title = params['title'];
+      this.productService.getProductById(title).subscribe((res:any) => {
+        this.product = res.product;
+        this.loading = false;
+      });
+    });
     this.cdr.detectChanges();
   }
 
   addToCart(id: any) {
-    this.loading = true;
     this.cartService.addToCart(id);
     this.cartService.getCartData().subscribe((res) => {
-      setTimeout(() => {
-        this.loading = false;
-      }, 1500);
     });
   }
 }

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg  bg-body-tertiary">
-  <div class="container-fluid">
+  <div class="container-fluid" style="flex-wrap: nowrap; gap: 8px;">
     <ul class="navbar-nav d-sm-flex d-none flex-column gap-3 flex-sm-row">
       <li
         *ngFor="let link of links"
@@ -11,20 +11,6 @@
         <a routerLink="/track" class="nav-link">Track order</a>
       </li>
     </ul>
-
-
-
-  <div class="nav-search" style="height: 2rem; width: 13.5rem;" >
-    <input type="text" #searchInput (keyup)="searchProduct($event)" (blur)="hideSearch()" placeholder="Search for products">
-    <ul class="suggested-search "
-      style="max-height: 10.5rem; z-index: 100;  background-color: rgb(255, 255, 255); overflow-y: hidden;z-index: 100; position: relative;   "
-      *ngIf="searchResult">
-      <li *ngFor="let item of searchResult" (mousedown)="redirectToDetails(item.title)">
-        <img src="{{item.thumbnail}}" alt=""> <a >{{item.title}}</a>
-      </li>
-    </ul>
-  
-  </div>
 
     <!-- menu button -->
     <i class="bi bi-list d-sm-none d-block fs-1" (click)="show()"></i>
@@ -44,30 +30,47 @@
       </div>
     </div>
   </div>
-  <!-- user menu -->
-    <div class=" position-relative px-2 d-flex gap-3">
-      <div class="user-menu z-3">
-        <span><i class="bi bi-person-circle"></i></span>
-        <div class="card" style="position: absolute; left: -2.5rem;">
-          <ul class="card-body">
-            <!-- if user is not login -->
-            <li *ngIf="!loggedIn"><a routerLink="/login">Login</a></li>
-            <li *ngIf="!loggedIn"><a routerLink="/signup">Signup</a></li>
 
-            <!-- if user is login -->
-            <li *ngIf="loggedIn" (click)="logout()">Logout</li>
-            <li *ngIf="loggedIn"><a routerLink="/order">My order</a></li>
-          </ul>
-        </div>
+  <div class="d-flex flex-row no-wrap">
+    <div  style="height: 2rem; min-width: auto; max-width: 18rem;">
+      <div class="input-group w-100">
+        <input type="text" class="form-control " placeholder="Search here ..." aria-label="search bar" #searchInput
+         (keyup.enter)="search(searchInput.value)"  (keyup)="searchProduct($event)" (blur)="hideSearch()" aria-describedby="basic-addon2">
+        <span class="input-group-text" id="basic-addon2" (click)="search(searchInput.value)" ><i class="bi bi-search"></i></span>
       </div>
-      <!-- cart button -->
-      <span
-        class="position-absolute translate-middle badge rounded-pill bg-danger"
-        style="top: 1px; right: -20px" 
-      >
-        {{this.count}}
-      </span>
-      <i class="bi bi-cart fs-4" title="Cart" style="cursor: pointer" routerLink="/cart"></i>
+      <ul class="suggested-search list-unstyled"
+        style="max-height: 11.4rem; z-index: 100;  background-color: rgb(255, 255, 255); overflow-y: hidden;z-index: 100; position: relative;   "
+        *ngIf="searchResult">
+        <li style="padding: 5px; display: flex; flex-direction: row; gap: 8px; cursor: pointer;"
+          *ngFor="let item of searchResult" (mousedown)="redirectToDetails(item.title)">
+          <img src="{{item.thumbnail}}" alt="" style="height: 2.2rem; width: 2.2rem;  "> <span
+            class="text-truncate">{{item.title}}</span>
+        </li>
+      </ul>
     </div>
+
+        <!-- user menu -->
+      <div class=" position-relative px-2 d-flex gap-3">
+        <div class="user-menu z-3">
+          <span><i class="bi bi-person-circle"></i></span>
+          <div class="card" style="position: absolute; left: -2.5rem;">
+            <ul class="card-body">
+              <!-- if user is not login -->
+              <li *ngIf="!loggedIn"><a routerLink="/login">Login</a></li>
+              <li *ngIf="!loggedIn"><a routerLink="/signup">Signup</a></li>
+      
+              <!-- if user is login -->
+              <li *ngIf="loggedIn" (click)="logout()">Logout</li>
+              <li *ngIf="loggedIn"><a routerLink="/order">My order</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- cart button -->
+        <span class="position-absolute translate-middle badge rounded-pill bg-danger" style="top: 1px; right: -20px">
+          {{this.count}}
+        </span>
+        <i class="bi bi-cart fs-4" title="Cart" style="cursor: pointer" routerLink="/cart"></i>
+      </div>
+  </div>   
   </div>
 </nav>

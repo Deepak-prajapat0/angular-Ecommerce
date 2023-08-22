@@ -50,13 +50,16 @@ export class CartService {
   storeLocalCart(){
    let cart = localStorage.getItem('cart')
     if(cart){
-      cart= JSON.parse(cart)
-       this.http.put(`${this.url}/cart-local`, this.cartData)
-        .subscribe((response: any) => {
-          this.cartData = response.cart; // Assuming the API response is an array of cart items
-          localStorage.setItem('cart', JSON.stringify(this.cartData));
-          return this.cartDataSubject.next(this.cartData); // Emit the updated cart data
-        });
+      let localCart= JSON.parse(cart)
+       if(localCart?.cartItems.length){
+        this.http
+          .put(`${this.url}/cart-local`, this.cartData)
+          .subscribe((response: any) => {
+            this.cartData = response.cart; // Assuming the API response is an array of cart items
+            localStorage.setItem('cart', JSON.stringify(this.cartData));
+            return this.cartDataSubject.next(this.cartData); // Emit the updated cart data
+          });
+       }
     }
   
   }

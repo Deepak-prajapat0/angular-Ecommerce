@@ -28,6 +28,7 @@ import { StripePayment } from './components/stripe/stripe.component';
 import { PaymentsuccessComponent } from './components/partials/paymentsuccess/paymentsuccess.component';
 import { PaymentfailedComponent } from './components/partials/paymentfailed/paymentfailed.component';
 import { TrackorderComponent } from './components/trackorder/trackorder.component';
+import { SearchproductComponent } from './components/products/searchproduct/searchproduct.component';
 
 
 
@@ -56,6 +57,7 @@ import { TrackorderComponent } from './components/trackorder/trackorder.componen
     PaymentsuccessComponent,
     PaymentfailedComponent,
     TrackorderComponent,
+    SearchproductComponent,
   ],
   imports: [
     BrowserModule,

@@ -31,8 +31,7 @@ export class PaymentsuccessComponent {
           this.orderId = res.orderId;
         } 
         localStorage.removeItem('paymentResponse');
-        localStorage.removeItem('cart')
-        localStorage.setItem('cart',JSON.stringify({totalItems:0}))
+        localStorage.removeItem('cart');
       });
   }
 }

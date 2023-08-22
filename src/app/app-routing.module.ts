@@ -19,6 +19,7 @@ import { StripePayment } from './components/stripe/stripe.component';
 import { PaymentsuccessComponent } from './components/partials/paymentsuccess/paymentsuccess.component';
 import { PaymentfailedComponent } from './components/partials/paymentfailed/paymentfailed.component';
 import { TrackorderComponent } from './components/trackorder/trackorder.component';
+import { SearchproductComponent } from './components/products/searchproduct/searchproduct.component';
 
 
 
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'updatepassword/:emailToken', component: UpdatepasswordComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'products/:title', component: ProductdetailComponent },
+  { path: 'products/search/:query', component: SearchproductComponent },
   { path: 'cart',  component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'order', canActivate: [authGuard],component: OrdersComponent },

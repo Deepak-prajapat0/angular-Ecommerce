@@ -44,6 +44,7 @@ export class CheckoutComponent {
   form = new FormGroup({
     bname:new FormControl('', [Validators.minLength(3)]),
     email:new FormControl('', [Validators.minLength(8)]),
+    password:new FormControl('', [Validators.minLength(6)]),
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     phone: new FormControl('', [
       Validators.required,
@@ -68,6 +69,9 @@ export class CheckoutComponent {
   }
   get email() {
     return this.form.get('email');
+  }
+  get password() {
+    return this.form.get('password');
   }
   get name() {
     return this.form.get('name');

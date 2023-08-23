@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg  bg-body-tertiary">
   <div class="container-fluid" style="flex-wrap: nowrap; gap: 8px;">
-    <ul class="navbar-nav d-sm-flex d-none flex-column gap-3 flex-sm-row">
+    <ul class="navbar-nav d-md-flex d-none gap-3 flex-sm-row">
       <li
         *ngFor="let link of links"
         class="flex-sm-fill text-sm-center nav-item"
@@ -13,30 +13,38 @@
     </ul>
 
     <!-- menu button -->
-    <i class="bi bi-list d-sm-none d-block fs-1" (click)="show()"></i>
+    <i class="bi bi-list d-md-none d-block fs-1" (click)="show()"></i>
     <!-- sidebar -->
-  <div [class.show]="open" class="offcanvas d-sm-none offcanvas-start backdrop" data-bs-scroll="true" id="offcanvasExample" (click)="hide()"   aria-labelledby="offcanvasExampleLabel">
+  <div [class.show]="open" class="offcanvas d-md-none offcanvas-start backdrop" data-bs-scroll="true" id="offcanvasExample" (click)="hide()"   aria-labelledby="offcanvasExampleLabel">
     <div>
       <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel"></h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" (click)="hide()"></button>
       </div>
-      <div class="offcanvas-body">
-            <ul class="navbar-nav d-sm-none d-block flex-column gap-2 flex-sm-row">
-              <li *ngFor="let link of links" class="flex-sm-fill text-sm-center nav-item">
+      <div class="offcanvas-body h-100 p-0 px-3">
+            <ul class="navbar-nav d-block flex-column gap-2 flex-sm-row">
+              <li *ngIf="!loggedIn" class="flex-sm-fill nav-item" ><a class="nav-link" routerLink="/login">Login</a></li>
+              <li *ngIf="!loggedIn" class="flex-sm-fill nav-item" ><a class="nav-link" routerLink="/signup">Signup</a></li>
+              <br>
+              <br>
+              <li *ngFor="let link of links" class="flex-sm-fill nav-item">
                 <a routerLink="{{ link.link }}" class="nav-link" (click)="hide()">{{ link.name }}</a>
               </li>
+              <!-- if user is login -->
+              <li *ngIf="loggedIn" class="flex-sm-fill nav-item" ><a class="nav-link" routerLink="/order">My order</a></li>
+              <li *ngIf="loggedIn" class="flex-sm-fill nav-item" ><a class="nav-link" routerLink="/wishlist">My Wishlist</a></li>
+              <li *ngIf="loggedIn"><button class="btn btn-primary btn-sm mt-auto" (click)="logout()">Logout</button></li>
             </ul>
       </div>
     </div>
   </div>
-
+  <!-- search bar -->
   <div class="d-flex flex-row no-wrap">
     <div  style="height: 2rem; min-width: auto; max-width: 18rem;">
       <div class="input-group w-100">
         <input type="text" class="form-control " placeholder="Search here ..." aria-label="search bar" #searchInput
          (keyup.enter)="search(searchInput.value)"  (keyup)="searchProduct($event)" (blur)="hideSearch()" aria-describedby="basic-addon2">
-        <span class="input-group-text" id="basic-addon2" (click)="search(searchInput.value)" ><i class="bi bi-search"></i></span>
+        <span class="input-group-text" style="cursor: pointer;" id="basic-addon2" (click)="search(searchInput.value)" ><i class="bi bi-search"></i></span>
       </div>
       <ul class="suggested-search list-unstyled"
         style="max-height: 11.4rem; z-index: 100;  background-color: rgb(255, 255, 255); overflow-y: hidden;z-index: 100; position: relative;   "
@@ -51,9 +59,9 @@
 
         <!-- user menu -->
       <div class=" position-relative px-2 d-flex gap-3">
-        <div class="user-menu z-3">
+        <div class="user-menu z-3 d-sm-block d-none " >
           <span><i class="bi bi-person-circle"></i></span>
-          <div class="card" style="position: absolute; left: -2.5rem;">
+          <div class="card" style="position: absolute; left: -3rem;">
             <ul class="card-body">
               <!-- if user is not login -->
               <li *ngIf="!loggedIn"><a routerLink="/login">Login</a></li>
@@ -62,6 +70,7 @@
               <!-- if user is login -->
               <li *ngIf="loggedIn" (click)="logout()">Logout</li>
               <li *ngIf="loggedIn"><a routerLink="/order">My order</a></li>
+              <li *ngIf="loggedIn"><a routerLink="/wishlist">My Wishlist</a></li>
             </ul>
           </div>
         </div>

@@ -1,8 +1,8 @@
-<div *ngIf="loading " class="loader w-100  d-flex justify-content-center position-absolute " style="height: 100vh;">
+<!-- <div *ngIf="loading " class="loader w-100  d-flex justify-content-center position-absolute " style="height: 100vh;">
   <div class="spinner-border mx-auto" role="status" style="--bs-spinner-animation-speed: 0.45s;">
     <span class="visually-hidden">Loading...</span>
   </div>
-</div>
+</div> -->
 
 <div class="p-4 d-flex flex-column gap-2 align-items-center text-center fs-2" *ngIf="!product && !loading">
   <span>Product not found</span>
@@ -14,7 +14,7 @@
     class="p-2 d-flex flex-column flex-md-row gap-5 justify-content-center align-items-center"
     *ngIf="product">
     <!-- image of product -->
-    <div style=" max-width: 30rem">
+    <div style=" max-width: 30rem ;">
       <img
         src="{{ image || product.images[0] }}"
         alt="{{ product.title }}"
@@ -30,7 +30,7 @@
     <div style="max-width: 30rem; align-self: flex-start;">
       <span style="font-size: 12px; color: rgb(76, 76, 245)"
         >Brand : {{ product.brand }}</span>
-      <h6 class="fs-3">{{ product.title }}</h6>
+      <h6 class="fs-3">{{ product.title| titlecase }}</h6>
       <p class="text-secondary">{{ product.description }}</p>
       <span><i class="bi bi-star-fill text-warning"></i> {{ product.rating }}
       </span>
@@ -51,7 +51,12 @@
        </span>
       </div>
        <br>
-       <button class="btn btn-primary" [disabled]="loading || product.stock===0" (click)="addToCart(product)" >Add to Cart <span *ngIf="loading" class="spinner-border spinner-border-sm" aria-hidden="true"></span> <i *ngIf="!loading" class="bi bi-cart"></i></button>
+       <div class="d-flex flex-row gap-2  ">
+        <button class="btn btn-primary btn-sm" [disabled]="loading || product.stock===0" (click)="addToCart(product)">Add to
+          Cart <span *ngIf="loading" class="spinner-border spinner-border-sm" aria-hidden="true"></span> <i *ngIf="!loading"
+            class="bi bi-cart"></i></button>
+        <button class="btn btn-sm btn-warning" [disabled]="loading"  (click)="wishlistProduct(product._id)">Add to wishlist <i class="bi bi-heart p-1"></i></button>
+       </div>
        <h6 *ngIf="product.stock === 0" class="p-2 text-danger fs-6">This item is currently out of stock</h6>
     </div>
   </div>

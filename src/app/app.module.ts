@@ -29,6 +29,7 @@ import { PaymentsuccessComponent } from './components/partials/paymentsuccess/pa
 import { PaymentfailedComponent } from './components/partials/paymentfailed/paymentfailed.component';
 import { TrackorderComponent } from './components/trackorder/trackorder.component';
 import { SearchproductComponent } from './components/products/searchproduct/searchproduct.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 
 
@@ -58,6 +59,7 @@ import { SearchproductComponent } from './components/products/searchproduct/sear
     PaymentfailedComponent,
     TrackorderComponent,
     SearchproductComponent,
+    WishlistComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,12 +5,15 @@
     <div class="col  p-2" *ngFor="let product of products">
             <div  class="card" [routerLink]="['/products',product.title]">
             <img class="card-img-top" style="height: 6rem;" src="{{product.thumbnail}}" alt="{{product.title}}">
-            <div class="card-body p-2">
+            <div class="card-body p-2 d-flex flex-column justify-content-between">
                 <h5 class="card-title" style="font-size: 12px; font-weight: 900;">{{product.brand}}</h5>
-                <h6 class="card-title text-truncate small">{{product.title}}</h6>
-                <p class="card-text text-body-secondary overflow-y-hidden" style="height: 2.5rem; font-size: 14px;">{{product.description}}</p>
-                <span><i class="bi bi-currency-rupee"></i>{{product.price}}</span>
-                <span class="float-end text-warning-emphasis"><i class="bi bi-star-fill"></i>{{product.rating}}</span>
+                <h6 class="card-title text-truncate small">{{product.title| titlecase}}</h6>
+                <p class="card-text text-body-secondary overflow-y-hidden" style="height: 2.5rem; font-size: 14px;">{{product.description}}</p>           
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <span><i class="bi bi-currency-rupee"></i>{{product.price}}</span>
+                    <span class="float-end text-warning-emphasis" style="font-size: 12px;"><i
+                            class="bi bi-star-fill"></i>{{product.rating}}</span>
+                </div>
             </div>
         </div>
     </div>

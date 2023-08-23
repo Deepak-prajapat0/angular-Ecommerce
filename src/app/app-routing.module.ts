@@ -20,6 +20,7 @@ import { PaymentsuccessComponent } from './components/partials/paymentsuccess/pa
 import { PaymentfailedComponent } from './components/partials/paymentfailed/paymentfailed.component';
 import { TrackorderComponent } from './components/trackorder/trackorder.component';
 import { SearchproductComponent } from './components/products/searchproduct/searchproduct.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 
 
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'products/:title', component: ProductdetailComponent },
   { path: 'products/search/:query', component: SearchproductComponent },
+  { path: 'wishlist', component: WishlistComponent },
   { path: 'cart',  component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'order', canActivate: [authGuard],component: OrdersComponent },

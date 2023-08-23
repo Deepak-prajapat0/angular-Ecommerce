@@ -11,11 +11,14 @@ import { ProductService } from 'src/app/services/product.service';
 export class SearchproductComponent {
   constructor(private Arouter:ActivatedRoute,private productService:ProductService,private cdr:ChangeDetectorRef){}
   products:Product[]=[]
+  loading:boolean =false
   ngOnInit(): void {
      this.Arouter.params.subscribe((params:any) => {
        const query = params['query'];
+       this.loading=true
        this.productService.getSearchProducts(query).subscribe((res: any) => {
          this.products = res;
+         this.loading=false
        });
      });
      this.cdr.detectChanges();

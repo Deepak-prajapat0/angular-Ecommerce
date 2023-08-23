@@ -1,0 +1,37 @@
+<div *ngIf="loading " class="loader w-100  d-flex justify-content-center position-absolute "  style="height: 100vh;" >
+    <div class="spinner-border mx-auto" role="status" style="--bs-spinner-animation-speed: 0.45s;">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+<div  *ngIf="wishlistProducts && wishlistProducts.length===0" class="d-flex flex-column gap-2 align-items-center">
+    <h2 class="text-center p-2">You have not wishlisted any product</h2>
+    <button class="btn btn-primary btn-sm" routerLink="/products">Add now</button>
+</div>
+<div class="container" *ngIf="wishlistProducts.length">
+    <h1 class="text-center p-3">My Wishlist items</h1>
+    <div class="d-flex flex-column gap-2">
+        <div *ngFor="let items of wishlistProducts; let i = index" class="card">
+            <div class="card-body p-3 d-flex flex-row justify-content-between gap-2" style="flex: none;" >
+                <div class="d-flex flex-row gap-2" [routerLink]="['/products',items.title]">
+                    <img src="{{items.thumbnail}}" alt="{{items.title}}" 
+                        style="margin: auto; height: 5rem; width: 5rem;">
+                    <div class="d-flex flex-column gap-2">
+                        <div >
+                            <h6 class="my-0">{{items.title | titlecase}}</h6>
+                            <span><i class="bi bi-star-fill text-warning"></i> {{ items.rating }}</span>
+                        </div>
+                        <span><i class="bi bi-currency-rupee"></i>
+                            {{items.price}}</span>
+                    </div>
+                </div>
+                <span
+                    style="width:max-content; margin: 2px; display: flex; flex-direction: column; justify-content: space-between; text-align:right; align-items: end; ">
+                        <i title="remove" class="bi bi-trash" style="cursor: pointer;" (click)="removeFromWishlist(items._id)"></i>
+                    <button *ngIf="items.stock >0" class="btn btn-primary btn-sm" (click)="addToCart(items)">Move to cart</button>
+                    <span *ngIf="items.stock === 0" class="stockOut p-1 rounded text-center text-danger">Out of stock</span>
+                </span>
+            </div>
+           
+        </div>
+    </div>
+</div>

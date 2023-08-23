@@ -40,21 +40,22 @@ export class HeaderComponent {
     if (cart) {
       this.count = JSON.parse(cart).totalItems;
       this.cartService.getCartData().subscribe((data: any) => {
-        if (data.totalItems) {
-          this.count = data.totalItems;
-        } else {
-          this.count = 0;
+        if (data) {
+          if(data.totalItems>0){
+            this.count = data.totalItems;
+          }
+          else{
+            this.count=0
+          }
         }
+        
       });
     } else {
       this.count = 0;
       this.cartService.getCartData().subscribe((data: any) => {
-        if (data) {
+        if (data.totalItems >0) {
           this.count = data.totalItems;
-          if(!this.count){
-            this.count=0
-          }
-        }
+        } 
       });
     }
     this.router.events.subscribe((val: any) => {

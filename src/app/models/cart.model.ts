@@ -1,8 +1,10 @@
+import { Product } from "./product.model"
+
 export interface Cart{
     userId:string,
     cartItems:[
         {
-            productId:any[],
+            productId:Product[],
             quantity:number
         }
     ],

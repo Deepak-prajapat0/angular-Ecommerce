@@ -6,6 +6,7 @@ import { states } from '../../state';
 import { OrderService } from 'src/app/services/order.service';
 import { ToastrService } from 'ngx-toastr';
 import { LoggerService } from 'src/app/services/logger.service';
+import { Cart } from 'src/app/models/cart.model';
 
 @Component({
   selector: 'app-checkout',
@@ -18,7 +19,7 @@ export class CheckoutComponent {
     private loggerService:LoggerService
   ) {}
   cartItems:any[]=[]
-  cartDetails: any;
+  cartDetails!: Cart;
   states: string[] = states;
   isClassAdded: boolean = false;
   isLoggedIn:boolean =false
@@ -33,7 +34,7 @@ export class CheckoutComponent {
     if (cart) {
       this.cartDetails = JSON.parse(cart);
        this.cartItems = this.cartDetails.cartItems;
-      if (this.cartDetails.cartItems.length === 0) {
+      if (this.cartDetails && this.cartDetails.cartItems.length < 0) {
         this.router.navigate(['/cart']);
       }
     } else {

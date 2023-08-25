@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { debounce, debounceTime, distinctUntilChanged } from 'rxjs';
+import { Cart } from 'src/app/models/cart.model';
 import { Product } from 'src/app/models/product.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -39,7 +40,7 @@ export class HeaderComponent {
 
     if (cart) {
       this.count = JSON.parse(cart).totalItems;
-      this.cartService.getCartData().subscribe((data: any) => {
+      this.cartService.getCartData().subscribe((data: Cart) => {
         if (data) {
           if(data.totalItems>0){
             this.count = data.totalItems;
@@ -52,7 +53,7 @@ export class HeaderComponent {
       });
     } else {
       this.count = 0;
-      this.cartService.getCartData().subscribe((data: any) => {
+      this.cartService.getCartData().subscribe((data: Cart) => {
         if (data.totalItems >0) {
           this.count = data.totalItems;
         } 

@@ -19,6 +19,7 @@ export class LoginComponent {
       this.router.navigate(['/']);
     }
   }
+  
   msg: String = '';
 
   form = new FormGroup({

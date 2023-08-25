@@ -33,14 +33,14 @@
                     </div>
                     <div class="ms-auto d-flex flex-column justify-content-between">
                         <span><i class="bi bi-currency-rupee"></i>{{item.productId.price}} x {{item.quantity}}</span>
-                        <button class="btn btn-warning btn-sm" *ngIf="item.canceled == false && orderDetail.status ==='completed' " [disabled]="loading" (click)="cancelItem(item.productId._id)">Cancel Item</button>
+                        <button class="btn btn-warning btn-sm" *ngIf=" isLoggedIn  && item.canceled == false && orderDetail.status ==='completed' " [disabled]="loading" (click)="cancelItem(item.productId._id)">Cancel Item</button>
                     </div>
         
                 </div>
             </div>
         </div>
         
-        <button class="cancel btn btn-primary" [disabled]="loading"  *ngIf="orderDetail && orderDetail.orderDetails.totalItems >= 1 && orderDetail.status === 'completed' " (click)="orderCancel(orderDetail._id)" >Cancel Order</button>
+        <button class="cancel btn btn-primary" [disabled]="loading"  *ngIf="isLoggedIn  &&  orderDetail && orderDetail.orderDetails.totalItems >= 1 && orderDetail.status === 'completed' " (click)="orderCancel(orderDetail._id)" >Cancel Order</button>
     </div>
     <div class="summery card" *ngIf="orderDetail && orderDetail.orderDetails && orderDetail.status!== 'canceled' && orderDetail.orderDetails.totalItems >= 1 " >
        <div class="card-body">

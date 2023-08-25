@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Cart } from 'src/app/models/cart.model';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent {
   constructor(private cartService: CartService) {}
-  cartDetails: any;
+  cartDetails!: Cart;
   cartItems: any[] = [];
   loading: boolean = false;
   selected:boolean = false
@@ -31,7 +32,7 @@ export class CartComponent {
     } else if (!cart && !localStorage.getItem('token')) {
     } else {
       this.cartService.getUserCart();
-      this.cartService.getCartData().subscribe((data: any) => {
+      this.cartService.getCartData().subscribe((data: Cart) => {
         if (data) {
           this.cartItems = data.cartItems;
           this.cartDetails = data;
@@ -42,10 +43,10 @@ export class CartComponent {
     }
   }
 
-  cartUpdate(productId: string, quantity: number) {
+  cartUpdate(productId: string, quantity: number):void {
     this.loading = true;
     this.cartService.cartUpdate(productId, quantity);
-    this.cartService.getCartData().subscribe((data: any) => {
+    this.cartService.getCartData().subscribe((data: Cart) => {
       if (data) {
         this.cartItems = data.cartItems;
         this.cartDetails = data;

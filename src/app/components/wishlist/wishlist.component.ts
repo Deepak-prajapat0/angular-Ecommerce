@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Product } from 'src/app/models/product.model';
 import { CartService } from 'src/app/services/cart.service';
 import { WishlistService } from 'src/app/services/wishlist.service';
 
@@ -9,7 +10,7 @@ import { WishlistService } from 'src/app/services/wishlist.service';
 })
 export class WishlistComponent {
   constructor(private wishlistService: WishlistService,private cartService:CartService) {}
-  wishlistProducts: any[] = [];
+  wishlistProducts: Product[] = [];
   loading: boolean = false;
 
   ngOnInit(): void {

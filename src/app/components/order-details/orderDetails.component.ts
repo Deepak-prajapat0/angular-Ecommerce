@@ -1,7 +1,10 @@
+import { LoggerService } from 'src/app/services/logger.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+
 import { OrderService } from 'src/app/services/order.service';
+import { Order } from 'src/app/models/order.model';
 
 @Component({
   selector: 'app-order-details',
@@ -13,14 +16,17 @@ export class OrderDetailsComponent {
     private Arouter: ActivatedRoute,
     private orderService: OrderService,
     private toastr: ToastrService,
-    private router:Router
+    private router:Router,
+    private loggerService:LoggerService
   ) {}
   loading: boolean = false;
   notFound:boolean = false;
-  orderDetail: any;
-  orderId: any;
+  orderDetail!: Order;
+  orderId: string | any;
+  isLoggedIn:boolean = false;
 
   ngOnInit(): void {
+    this.isLoggedIn = this.loggerService.isLoggedin;
     this.orderId = this.Arouter.snapshot.paramMap.get('orderId');
     if (this.orderId) {
       this.loading = true

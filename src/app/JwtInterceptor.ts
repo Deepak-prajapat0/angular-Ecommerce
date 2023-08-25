@@ -1,3 +1,4 @@
+import { LoggerService } from 'src/app/services/logger.service';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
@@ -15,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class TokenInterceptorService implements HttpInterceptor {
-  constructor(private authService: AuthService,private toastr:ToastrService) {}
+  constructor(private authService: AuthService,private loggerService:LoggerService,private toastr:ToastrService) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -39,6 +40,9 @@ export class TokenInterceptorService implements HttpInterceptor {
           this.authService.logout();
         } else if (err.status === 404 || err.status === 400) {
           this.toastr.error(err.error.msg);
+        }
+        else if(err.status === 403 && this.loggerService.isLoggedin ===true ){
+          this.toastr.error(err.error.msg)
         }
         const error = err.error.message || err.statusText;
         return throwError(error);

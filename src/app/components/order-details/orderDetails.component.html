@@ -24,7 +24,7 @@
        </div>
         </div>
         <div *ngFor="let item of orderDetail.orderDetails.products">
-            <div class="card m-2">
+            <div *ngIf="item.canceled===false || item.canceled === true && orderDetail.status==='canceled' " class="card m-2">
                 <div class="card-body" class="p-2 d-flex flex-row gap-2">
                     <img src="{{item.productId.thumbnail}}" alt="" style="height:5rem; width: 5rem;">
                     <div class="d-flex flex-column w-50">

@@ -53,6 +53,9 @@ export class OrderDetailsComponent {
           this.notFound = true;
         }
       });
+        setTimeout(() => {
+          this.loading = false;
+        }, 2000);
   }
 
   orderCancel(id: string) {
@@ -63,10 +66,13 @@ export class OrderDetailsComponent {
            this.router.navigateByUrl('/order');
          }
         this.orderDetail = data.order;
-         this.toastr.success(data.msg);
+        this.toastr.success(data.msg);
         this.loading = false;
         this.notFound = true;
       }
     });
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   }
 }

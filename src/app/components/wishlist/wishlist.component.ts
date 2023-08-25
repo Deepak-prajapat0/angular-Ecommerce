@@ -31,7 +31,7 @@ export class WishlistComponent {
   }
 
   removeFromWishlist(productId:string){
-    this.wishlistService.removeFromWishlist(productId).subscribe(res=>{
+    this.wishlistService.removeFromWishlist(productId).subscribe((res:any)=>{
      this.wishlistProducts = res.wishlist.products
     })
   }
